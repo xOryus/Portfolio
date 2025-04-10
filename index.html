@@ -68,7 +68,7 @@
             </div>
 
             <!-- Security Dashboard - Novo elemento que substitui o terminal -->
-            <div class="security-dashboard">
+            <div class="cyber-dashboard">
                 <div class="dashboard-header">
                     <div class="dashboard-title">
                         <i class="fas fa-shield-alt"></i>
@@ -79,52 +79,101 @@
                         <span class="status-text">Secure</span>
                     </div>
                 </div>
-                <div class="dashboard-content">
-                    <div class="dashboard-column">
-                        <div class="dashboard-card identity">
-                            <h3><i class="fas fa-user-shield"></i> Identity</h3>
-                            <div class="card-content">
-                                <p class="highlight">Pesquisador de Segurança | Pentester | Bug Hunter</p>
-                                <div class="tag-container">
-                                    <span class="tag">Web Security</span>
-                                    <span class="tag">API Testing</span>
-                                    <span class="tag">Mobile Security</span>
-                                </div>
-                            </div>
+
+                <div class="dashboard-grid">
+                    <!-- Perfil e Informações -->
+                    <div class="dashboard-card profile">
+                        <div class="card-header">
+                            <i class="fas fa-user-shield"></i> PROFILE
                         </div>
-                        <div class="dashboard-card mission">
-                            <h3><i class="fas fa-flag"></i> Mission</h3>
-                            <div class="card-content">
-                                <p class="mission-text">"Protegendo o futuro, quebrando barreiras no presente."</p>
+                        <div class="card-content">
+                            <div class="profile-title">Cybersecurity Specialist</div>
+                            <div class="profile-subtitle">Pesquisador de Segurança | Pentester | Bug Hunter</div>
+                            <div class="tag-container">
+                                <span class="tag">Web Security</span>
+                                <span class="tag">API Testing</span>
+                                <span class="tag">Mobile Security</span>
                             </div>
                         </div>
                     </div>
-                    <div class="dashboard-column">
-                        <div class="dashboard-card skill-radar">
-                            <h3><i class="fas fa-chart-radar"></i> Skill Radar</h3>
-                            <div class="card-content">
-                                <div class="radar-chart">
-                                    <div class="radar-metric" style="--percentage: 90%">
-                                        <span class="metric-label">Web App Testing</span>
-                                        <div class="metric-bar"><span class="metric-value">90%</span></div>
-                                    </div>
-                                    <div class="radar-metric" style="--percentage: 80%">
-                                        <span class="metric-label">Mobile Security</span>
-                                        <div class="metric-bar"><span class="metric-value">80%</span></div>
-                                    </div>
-                                    <div class="radar-metric" style="--percentage: 75%">
-                                        <span class="metric-label">API Security</span>
-                                        <div class="metric-bar"><span class="metric-value">75%</span></div>
+
+                    <!-- Missão -->
+                    <div class="dashboard-card mission">
+                        <div class="card-header">
+                            <i class="fas fa-flag"></i> MISSION
+                        </div>
+                        <div class="card-content">
+                            <div class="mission-text">"Protegendo o futuro, quebrando barreiras no presente."</div>
+                        </div>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="dashboard-card skills">
+                        <div class="card-header">
+                            <i class="fas fa-chart-line"></i> SKILLS
+                        </div>
+                        <div class="card-content">
+                            <div class="skill-bar">
+                                <div class="skill-name">Web App Testing</div>
+                                <div class="skill-level">
+                                    <div class="skill-progress" style="width: 90%">
+                                        <span class="skill-percent">90%</span>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="skill-bar">
+                                <div class="skill-name">Mobile Security</div>
+                                <div class="skill-level">
+                                    <div class="skill-progress" style="width: 80%">
+                                        <span class="skill-percent">80%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="skill-bar">
+                                <div class="skill-name">API Security</div>
+                                <div class="skill-level">
+                                    <div class="skill-progress" style="width: 75%">
+                                        <span class="skill-percent">75%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Achievements -->
+                    <div class="dashboard-card achievements">
+                        <div class="card-header">
+                            <i class="fas fa-trophy"></i> ACHIEVEMENTS
+                        </div>
+                        <div class="card-content">
+                            <ul class="achievement-list">
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>+10 CVEs reportados</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Hall of Fame (Ford/Itaú)</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Top 5% HackerOne</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
+
                 <div class="dashboard-footer">
                     <div class="activity-indicator">
                         <span class="pulse"></span>
                         <span class="activity-text">Monitoramento ativo</span>
+                    </div>
+                    <div class="system-stats">
+                        <span class="stat">Uptime: 99.9%</span>
+                        <span class="stat">Threats neutralized: 358</span>
                     </div>
                 </div>
             </div>
