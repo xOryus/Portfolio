@@ -101,7 +101,7 @@ Para ajustar as cores e estilo:
 
 ### 🖥️ Dashboard de Segurança
 
-O dashboard de segurança é um componente visual que substitui o terminal interativo mencionado anteriormente. Para personalizá-lo:
+O dashboard de segurança é um componente visual inteligente e dinâmico.  Para personalizá-lo:
 
 1. **Edite as métricas e estatísticas**:
 
@@ -119,7 +119,7 @@ O dashboard de segurança é um componente visual que substitui o terminal inter
 1. Clone ou baixe este repositório:
 
    ```bash
-   git clone https://github.com/seu-usuario/portfolio-cybersecurity.git
+   git clone https://github.com/xOryus/Portfolio.git
    ```
 
 2. Personalize os arquivos conforme suas necessidades
@@ -163,6 +163,6 @@ Este projeto está disponível como código aberto sob a [licença MIT](LICENSE)
 
 <div align="center">
 
-**🔐 Desenvolvido por [Gabriel](https://github.com/seu-usuario) | Cybersecurity Specialist 🔐**
+**🔐 Desenvolvido por [Gabriel](https://github.com/xOryus) | Cybersecurity Specialist 🔐**
 
 </div>
