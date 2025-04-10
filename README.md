@@ -37,7 +37,7 @@ portfolio/
 │
 ├── css/
 │   ├── reset.css            # Reset de estilos
-│   ├── main.css             # Estilos principais 
+│   ├── main.css             # Estilos principais
 │   ├── animations.css       # Animações e efeitos visuais
 │   └── responsive.css       # Adaptações para dispositivos
 │
@@ -60,12 +60,8 @@ portfolio/
 
 Para personalizar o portfólio com suas informações:
 
-<<<<<<< HEAD
-1. Edite o arquivo `index.html` para atualizar:
-=======
 1. **Edite o arquivo `index.html` para atualizar**:
 
->>>>>>> f0e91fc (Improve the README file and add a preview image.)
    - Nome e título profissional
    - Experiências e timeline
    - Certificações e formação acadêmica
@@ -85,18 +81,6 @@ Para personalizar o portfólio com suas informações:
 
 Para ajustar as cores e estilo:
 
-<<<<<<< HEAD
-1. Edite as variáveis CSS em `css/main.css`:
-   ```css
-   :root {
-       --color-background: #0a0a0f;
-       --color-surface: #15151e;
-       --color-primary: #00a8ff;
-       --color-secondary: #18e6c7;
-       --color-accent: #ff003c;
-       --color-text: #e0e0e8;
-       --color-text-muted: #8888a2;
-=======
 1. **Edite as variáveis CSS em `css/main.css`**:
 
    ```css
@@ -108,7 +92,6 @@ Para ajustar as cores e estilo:
      --color-accent: #ff003c; /* Cor de destaque (vermelho) */
      --color-text: #e0e0e8; /* Cor de texto principal */
      --color-text-muted: #8888a2; /* Cor de texto secundário */
->>>>>>> f0e91fc (Improve the README file and add a preview image.)
    }
    ```
 
@@ -116,15 +99,7 @@ Para ajustar as cores e estilo:
 
    Ajuste o arquivo `css/animations.css` para personalizar as transições e efeitos.
 
-<<<<<<< HEAD
-O terminal interativo pode ser personalizado no arquivo `js/terminal.js`:
-
-1. Adicione ou modifique comandos no objeto `commandList`
-2. Personalize as respostas dos comandos existentes
-3. Crie novos arquivos virtuais em `catFile()`
-=======
 ### 🖥️ Dashboard de Segurança
->>>>>>> f0e91fc (Improve the README file and add a preview image.)
 
 O dashboard de segurança é um componente visual que substitui o terminal interativo mencionado anteriormente. Para personalizá-lo:
 
@@ -165,21 +140,13 @@ O dashboard de segurança é um componente visual que substitui o terminal inter
 ## 📱 Compatibilidade
 
 O portfólio é totalmente responsivo e compatível com:
-<<<<<<< HEAD
-- Chrome, Firefox, Safari, Edge (versões modernas)
-- Dispositivos móveis e tablets (iOS e Android)
-=======
 
 - ✅ Chrome, Firefox, Safari, Edge (versões modernas)
 - ✅ Dispositivos móveis e tablets (iOS e Android)
 - ✅ Diferentes tamanhos de tela e orientações
->>>>>>> f0e91fc (Improve the README file and add a preview image.)
 
 ## 📊 Demonstração de Recursos
 
-<<<<<<< HEAD
-Este projeto está disponível como código aberto sob a licença MIT.
-=======
 | Recurso                      | Descrição                                                       |
 | ---------------------------- | --------------------------------------------------------------- |
 | **Dashboard de Segurança**   | Interface interativa que exibe habilidades, conquistas e status |
@@ -199,4 +166,3 @@ Este projeto está disponível como código aberto sob a [licença MIT](LICENSE)
 **🔐 Desenvolvido por [Gabriel](https://github.com/seu-usuario) | Cybersecurity Specialist 🔐**
 
 </div>
->>>>>>> f0e91fc (Improve the README file and add a preview image.)

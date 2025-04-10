@@ -67,29 +67,113 @@
                 <h2 class="cybr-text">CYBERSECURITY SPECIALIST</h2>
             </div>
 
-            <div class="terminal">
-                <div class="terminal-header">
-                    <div class="terminal-buttons">
-                        <span class="terminal-button close"></span>
-                        <span class="terminal-button minimize"></span>
-                        <span class="terminal-button maximize"></span>
+            <!-- Security Dashboard - Novo elemento que substitui o terminal -->
+            <div class="cyber-dashboard">
+                <div class="dashboard-header">
+                    <div class="dashboard-title">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Security Dashboard</span>
                     </div>
-                    <div class="terminal-title">terminal@portfolio ~ </div>
+                    <div class="dashboard-status">
+                        <span class="status-indicator online"></span>
+                        <span class="status-text">Secure</span>
+                    </div>
                 </div>
-                <div class="terminal-content">
-                    <div class="line">
-                        <span class="prompt">$ </span>
-                        <span class="command">whoami</span>
+
+                <div class="dashboard-grid">
+                    <!-- Perfil e Informações -->
+                    <div class="dashboard-card profile">
+                        <div class="card-header">
+                            <i class="fas fa-user-shield"></i> PROFILE
+                        </div>
+                        <div class="card-content">
+                            <div class="profile-title">Cybersecurity Specialist</div>
+                            <div class="profile-subtitle">Pesquisador de Segurança | Pentester | Bug Hunter</div>
+                            <div class="tag-container">
+                                <span class="tag">Web Security</span>
+                                <span class="tag">API Testing</span>
+                                <span class="tag">Mobile Security</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="response">Pesquisador de Segurança | Pentester | Bug Hunter</div>
-                    <div class="line">
-                        <span class="prompt">$ </span>
-                        <span class="command">cat mission.txt</span>
+
+                    <!-- Missão -->
+                    <div class="dashboard-card mission">
+                        <div class="card-header">
+                            <i class="fas fa-flag"></i> MISSION
+                        </div>
+                        <div class="card-content">
+                            <div class="mission-text">"Protegendo o futuro, quebrando barreiras no presente."</div>
+                        </div>
                     </div>
-                    <div class="response">Protegendo o futuro, quebrando barreiras no presente.</div>
-                    <div class="line">
-                        <span class="prompt">$ </span>
-                        <span class="cursor blink">_</span>
+
+                    <!-- Skills -->
+                    <div class="dashboard-card skills">
+                        <div class="card-header">
+                            <i class="fas fa-chart-line"></i> SKILLS
+                        </div>
+                        <div class="card-content">
+                            <div class="skill-bar">
+                                <div class="skill-name">Web App Testing</div>
+                                <div class="skill-level">
+                                    <div class="skill-progress" style="width: 90%">
+                                        <span class="skill-percent">90%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="skill-bar">
+                                <div class="skill-name">Mobile Security</div>
+                                <div class="skill-level">
+                                    <div class="skill-progress" style="width: 80%">
+                                        <span class="skill-percent">80%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="skill-bar">
+                                <div class="skill-name">API Security</div>
+                                <div class="skill-level">
+                                    <div class="skill-progress" style="width: 75%">
+                                        <span class="skill-percent">75%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Achievements -->
+                    <div class="dashboard-card achievements">
+                        <div class="card-header">
+                            <i class="fas fa-trophy"></i> ACHIEVEMENTS
+                        </div>
+                        <div class="card-content">
+                            <ul class="achievement-list">
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>+10 CVEs reportados</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Hall of Fame (Ford/Itaú)</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Top 5% HackerOne</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-footer">
+                    <div class="activity-indicator">
+                        <span class="pulse"></span>
+                        <span class="activity-text">Monitoramento ativo</span>
+                    </div>
+                    <div class="system-stats">
+                        <span class="stat">Uptime: 99.9%</span>
+                        <span class="stat">Threats neutralized: 358</span>
                     </div>
                 </div>
             </div>
@@ -386,7 +470,6 @@
     <!-- JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/terminal.js"></script>
     <script src="js/animations.js"></script>
 </body>
 

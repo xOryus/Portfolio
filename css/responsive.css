@@ -1,10 +1,11 @@
-/* 
- * RESPONSIVE CSS - ADAPTAÇÃO PARA DISPOSITIVOS
- * Garante que o portfólio seja responsivo em diferentes tamanhos de tela
- */
+/*
+ * RESPONSIVE.CSS - RESPONSIVIDADE PARA PORTFÓLIO
+ * Ajustes de responsividade para diferentes tamanhos de tela
+*/
 
 /* Tablets (menor que 1024px) */
-@media (max-width: 1024px) {
+
+@media(max-width: 1024px) {
     .section-title {
         font-size: 2.2rem;
     }
@@ -26,29 +27,210 @@
 
     .social-link {
         flex: 1 0 45%;
+
         margin-bottom: 1rem;
+    }
+
+    /* Dashboard ajustes para tablets */
+
+    .security-dashboard,
+    .cyber-dashboard {
+        max-width: 95%;
+    }
+}
+
+/* Tablets & dispositivos menores (até 992px) */
+
+@media screen and(max-width: 992px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    header {
+        padding: 0.8rem 0;
+    }
+
+    .logo-text {
+        font-size: 1.5rem;
+    }
+
+    /* Navegação mobile */
+
+    nav ul {
+        position: absolute;
+        z-index: 99;
+        top: 100%;
+        left: 0;
+
+        display: none;
+        flex-direction: column;
+
+        width: 100%;
+        padding: 1rem 0;
+
+        background-color: rgba(10, 10, 15, 0.95);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+
+        backdrop-filter: blur(10px);
+        gap: 0;
+    }
+
+    nav.open ul {
+        display: flex;
+    }
+
+    nav ul li {
+        width: 100%;
+    }
+
+    .nav-link {
+        display: block;
+
+        width: 100%;
+        padding: 0.8rem 2rem;
+
+        text-align: left;
+    }
+
+    .nav-link:hover::before {
+        width: 5px;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    /* Ajustes seção home */
+
+    .glitch {
+        font-size: 3.5rem;
+    }
+
+    .cybr-text {
+        font-size: 1.2rem;
+    }
+
+    /* Security Dashboard (novo) */
+
+    .security-dashboard {
+        max-width: 100%;
+    }
+
+    .dashboard-content {
+        flex-direction: column;
+
+        gap: 1rem;
+    }
+
+    .dashboard-column {
+        min-width: 100%;
+    }
+
+    .dashboard-footer {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+    .system-stats {
+        justify-content: space-between;
+
+        width: 100%;
+    }
+
+    /* Ajustes timeline */
+
+    .timeline::before {
+        left: 1.5rem;
+    }
+
+    .timeline-item {
+        padding-left: 4rem;
+    }
+
+    .timeline-item::before {
+        font-size: 0.7rem;
+
+        width: 3rem;
+    }
+
+    .timeline-item::after {
+        left: 1.5rem;
+    }
+
+    /* Grid de certificações */
+
+    .certifications-grid {
+        grid-template-columns: repeat(auto-fill, minmax( 200px, 1fr) );
+    }
+
+    .wide-card {
+        text-align: center;
+
+        grid-template-columns: 1fr;
+    }
+
+    .wide-card .certification-icon {
+        margin: 0 auto 1.5rem;
+    }
+
+    /* Grid de projetos */
+
+    .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax( 250px, 1fr) );
+    }
+
+    /* Contato */
+
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .social-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        gap: 1rem;
+    }
+
+    .social-link {
+        flex: 1 1 45%;
+    }
+
+    /* Responsividade para o novo Cyber Dashboard */
+
+    .dashboard-grid {
+        grid-template-columns: 1fr 1fr;
     }
 }
 
 /* Tablets pequenos e celulares grandes (menor que 768px) */
-@media (max-width: 768px) {
 
+@media(max-width: 768px) {
     /* Navegação mobile */
+
     nav ul {
         position: fixed;
+        z-index: 99;
         top: 60px;
         right: -100%;
-        width: 70%;
-        height: 100vh;
-        background-color: rgba(10, 10, 15, 0.95);
-        backdrop-filter: blur(10px);
+
         display: flex;
+        align-items: center;
         flex-direction: column;
         justify-content: flex-start;
-        align-items: center;
+
+        width: 70%;
+        height: 100vh;
         padding: 3rem 0;
+
         transition: right 0.3s ease;
-        z-index: 99;
+
+        background-color: rgba(10, 10, 15, 0.95);
+
+        backdrop-filter: blur(10px);
     }
 
     nav.active ul {
@@ -60,7 +242,7 @@
     }
 
     nav.active .menu-toggle .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
+        transform: translateY(8px) rotate( 45deg);
     }
 
     nav.active .menu-toggle .bar:nth-child(2) {
@@ -68,42 +250,46 @@
     }
 
     nav.active .menu-toggle .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
+        transform: translateY(-8px) rotate( -45deg);
     }
 
     .glitch {
-        font-size: 3.5rem;
+        font-size: 3.2rem;
+
+        letter-spacing: 3px;
     }
 
     .cybr-text {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 
     .timeline::before {
-        left: 1rem;
+        left: 1.5rem;
     }
 
     .timeline-item {
-        padding-left: 3rem;
+        padding-left: 3.5rem;
     }
 
     .timeline-item::before {
-        width: 4rem;
-        height: 2rem;
         font-size: 0.8rem;
+
+        width: 2.8rem;
+        height: 2rem;
     }
 
     .timeline-item::after {
-        left: 0.75rem;
+        left: 1.5rem;
     }
 
     .certifications-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax( 200px, 1fr) );
     }
 
     .wide-card {
-        grid-template-columns: 1fr;
         text-align: center;
+
+        grid-template-columns: 1fr;
     }
 
     .wide-card .certification-icon {
@@ -122,93 +308,176 @@
     .projects-grid {
         grid-template-columns: 1fr;
     }
-}
 
-/* Celulares (menor que 576px) */
-@media (max-width: 576px) {
-    :root {
-        font-size: 14px;
+    /* Responsividade para o novo Cyber Dashboard */
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
     }
 
+    .cyber-dashboard {
+        margin: 1.5rem auto;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+
+        text-align: center;
+
+        gap: 0.8rem;
+    }
+
+    .dashboard-footer {
+        align-items: center;
+        flex-direction: column;
+
+        text-align: center;
+
+        gap: 1rem;
+    }
+}
+
+/* Dispositivos móveis (até 576px) */
+
+@media screen and(max-width: 576px) {
     .section {
         padding: 4rem 0;
     }
 
+    .section-title {
+        font-size: 1.8rem;
+
+        margin-bottom: 2rem;
+    }
+
+    /* Ajustes seção home */
+
     .glitch {
-        font-size: 2.8rem;
-        letter-spacing: 3px;
+        font-size: 2.5rem;
+
+        padding: 0 10px;
+
+        letter-spacing: 2px;
     }
 
-    .terminal {
-        width: 95%;
+    .cybr-text {
+        font-size: 1rem;
+
+        letter-spacing: 1px;
     }
 
-    .timeline-item {
-        padding-left: 2rem;
+    /* Security Dashboard (novo) */
+
+    .security-dashboard {
+        max-width: 100%;
+        margin: 1rem auto;
     }
 
-    .timeline::before {
-        left: 0.5rem;
-    }
-
-    .timeline-item::before {
-        width: 3rem;
-        font-size: 0.7rem;
-        left: -0.5rem;
-    }
-
-    .timeline-item::after {
-        left: 0.25rem;
-    }
-
-    .social-link {
-        flex: 1 0 100%;
-    }
-
-    .footer-content {
+    .dashboard-header {
+        align-items: flex-start;
         flex-direction: column;
-        gap: 1.5rem;
-        text-align: center;
+
+        padding: 0.8rem;
+
+        gap: 0.5rem;
     }
 
-    .footer-links {
-        justify-content: center;
+    .dashboard-status {
+        align-self: flex-end;
     }
 
-    .certification-card {
+    .dashboard-content {
         padding: 1rem;
     }
 
-    .certification-icon {
-        width: 50px;
-        height: 50px;
+    .dashboard-card h3 {
+        font-size: 1rem;
     }
 
-    .certification-icon i {
-        font-size: 1.5rem;
+    .tag-container {
+        justify-content: flex-start;
+    }
+
+    .achievement-list li {
+        font-size: 0.9rem;
+    }
+
+    .system-stats {
+        flex-wrap: wrap;
+
+        gap: 8px;
+    }
+
+    .stat {
+        font-size: 0.7rem;
+    }
+
+    /* Timeline */
+
+    .timeline-content h3 {
+        font-size: 1.2rem;
+    }
+
+    /* Cards de reconhecimento */
+
+    .badge-container {
+        gap: 1.5rem;
+    }
+
+    .badge-img {
+        width: 80px;
+        height: 80px;
     }
 
     .counter {
         font-size: 2.5rem;
     }
+
+    /* Projetos */
+
+    .project-header {
+        padding: 1rem;
+    }
+
+    .project-header h3 {
+        font-size: 1rem;
+    }
+
+    /* Footer */
+
+    .footer-content {
+        flex-direction: column;
+
+        text-align: center;
+
+        gap: 1rem;
+    }
+
+    .footer-links {
+        justify-content: center;
+    }
 }
 
 /* Celulares pequenos (menor que 375px) */
-@media (max-width: 375px) {
+
+@media(max-width: 375px) {
     .section-title {
         font-size: 1.8rem;
     }
 
     .glitch {
         font-size: 2.2rem;
+
+        letter-spacing: 1px;
     }
 
     .cybr-text {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 
     .terminal-content {
         font-size: 0.8rem;
+
         padding: 1rem;
     }
 
@@ -220,4 +489,82 @@
         width: 70px;
         height: 70px;
     }
+}
+
+/* Dispositivos muito pequenos (até 400px) */
+
+@media screen and(max-width: 400px) {
+    .glitch {
+        font-size: 2rem;
+
+        padding: 0 5px;
+
+        letter-spacing: 1px;
+    }
+
+    .cybr-text {
+        font-size: 0.9rem;
+    }
+
+    .timeline-item::before {
+        font-size: 0.65rem;
+
+        height: 2rem;
+    }
+
+    .certification-card h3 {
+        font-size: 1rem;
+    }
+
+    /* Security Dashboard para telas muito pequenas */
+
+    .dashboard-card {
+        padding: 0.8rem;
+    }
+
+    .radar-metric {
+        margin-bottom: 0.8rem;
+    }
+
+    .metric-label {
+        font-size: 0.75rem;
+    }
+
+    .achievement-list {
+        gap: 0.6rem;
+    }
+
+    .achievement-list li {
+        font-size: 0.8rem;
+    }
+
+    .activity-text {
+        font-size: 0.7rem;
+    }
+
+    .tag {
+        font-size: 0.7rem;
+
+        padding: 3px 6px;
+    }
+
+    .social-link {
+        flex: 1 1 100%;
+    }
+}
+
+/* Altura mínima para telas curtas */
+
+@media screen and(max-height: 700px) {
+    #home {
+        height: auto;
+        min-height: 100vh;
+        padding: 5rem 0 2rem;
+    }
+
+    .glitch-container {
+        margin-bottom: 1.5rem;
+    }
+
+    /* Removemos a transformação de escala que estava causando problemas */
 }
