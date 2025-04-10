@@ -980,6 +980,7 @@ to {
     font-weight: 600;
 
     position: absolute;
+    z-index: 1; /* Adicionado para ficar abaixo da bolinha */
     top: 0;
     left: 0;
 
@@ -1000,8 +1001,9 @@ to {
 
 .timeline-item::after {
     position: absolute;
-    top: 1.25rem;
-    left: 2.75rem;
+    z-index: 2;
+    top: 1rem;
+    left: 1rem;
 
     width: 8px;
     height: 8px;

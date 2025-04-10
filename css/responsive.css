@@ -5,7 +5,7 @@
 
 /* Tablets (menor que 1024px) */
 
-@media (max-width: 1024px) {
+@media(max-width: 1024px) {
     .section-title {
         font-size: 2.2rem;
     }
@@ -30,8 +30,9 @@
 
         margin-bottom: 1rem;
     }
-    
+
     /* Dashboard ajustes para tablets */
+
     .security-dashboard,
     .cyber-dashboard {
         max-width: 95%;
@@ -40,7 +41,7 @@
 
 /* Tablets & dispositivos menores (até 992px) */
 
-@media screen and (max-width: 992px) {
+@media screen and(max-width: 992px) {
     .container {
         padding: 0 1rem;
     }
@@ -141,7 +142,7 @@
     /* Ajustes timeline */
 
     .timeline::before {
-        left: 1rem;
+        left: 1.5rem;
     }
 
     .timeline-item {
@@ -155,7 +156,7 @@
     }
 
     .timeline-item::after {
-        left: 1rem;
+        left: 1.5rem;
     }
 
     /* Grid de certificações */
@@ -207,7 +208,7 @@
 
 /* Tablets pequenos e celulares grandes (menor que 768px) */
 
-@media (max-width: 768px) {
+@media(max-width: 768px) {
     /* Navegação mobile */
 
     nav ul {
@@ -263,22 +264,22 @@
     }
 
     .timeline::before {
-        left: 1rem;
+        left: 1.5rem;
     }
 
     .timeline-item {
-        padding-left: 3rem;
+        padding-left: 3.5rem;
     }
 
     .timeline-item::before {
         font-size: 0.8rem;
 
-        width: 4rem;
+        width: 2.8rem;
         height: 2rem;
     }
 
     .timeline-item::after {
-        left: 0.75rem;
+        left: 1.5rem;
     }
 
     .certifications-grid {
@@ -338,7 +339,7 @@
 
 /* Dispositivos móveis (até 576px) */
 
-@media screen and (max-width: 576px) {
+@media screen and(max-width: 576px) {
     .section {
         padding: 4rem 0;
     }
@@ -459,7 +460,7 @@
 
 /* Celulares pequenos (menor que 375px) */
 
-@media (max-width: 375px) {
+@media(max-width: 375px) {
     .section-title {
         font-size: 1.8rem;
     }
@@ -492,7 +493,7 @@
 
 /* Dispositivos muito pequenos (até 400px) */
 
-@media screen and (max-width: 400px) {
+@media screen and(max-width: 400px) {
     .glitch {
         font-size: 2rem;
 
@@ -554,7 +555,7 @@
 
 /* Altura mínima para telas curtas */
 
-@media screen and (max-height: 700px) {
+@media screen and(max-height: 700px) {
     #home {
         height: auto;
         min-height: 100vh;
@@ -564,6 +565,6 @@
     .glitch-container {
         margin-bottom: 1.5rem;
     }
-    
+
     /* Removemos a transformação de escala que estava causando problemas */
 }

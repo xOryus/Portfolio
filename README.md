@@ -19,7 +19,7 @@ portfolio/
 ├── index.html               # Página principal
 ├── css/
 │   ├── reset.css            # Reset de estilos
-│   ├── main.css             # Estilos principais 
+│   ├── main.css             # Estilos principais
 │   ├── animations.css       # Animações e efeitos visuais
 │   └── responsive.css       # Adaptações para dispositivos
 ├── js/
@@ -37,6 +37,7 @@ portfolio/
 Para personalizar o portfólio com suas informações:
 
 1. Edite o arquivo `index.html` para atualizar:
+
    - Nome e título profissional
    - Experiências e timeline
    - Certificações e formação acadêmica
@@ -51,23 +52,22 @@ Para personalizar o portfólio com suas informações:
 Para ajustar as cores e estilo:
 
 1. Edite as variáveis CSS em `css/main.css`:
+
    ```css
    :root {
-       --color-background: #0a0a0f;
-       --color-surface: #15151e;
-       --color-primary: #00a8ff;
-       --color-secondary: #18e6c7;
-       --color-accent: #ff003c;
-       --color-text: #e0e0e8;
-       --color-text-muted: #8888a2;
+     --color-background: #0a0a0f;
+     --color-surface: #15151e;
+     --color-primary: #00a8ff;
+     --color-secondary: #18e6c7;
+     --color-accent: #ff003c;
+     --color-text: #e0e0e8;
+     --color-text-muted: #8888a2;
    }
    ```
 
 2. Para modificar animações, ajuste o arquivo `css/animations.css`.
 
 ### Terminal Interativo
-
-O terminal interativo pode ser personalizado no arquivo `js/terminal.js`:
 
 1. Adicione ou modifique comandos no objeto `commandList`
 2. Personalize as respostas dos comandos existentes
@@ -89,6 +89,7 @@ O terminal interativo pode ser personalizado no arquivo `js/terminal.js`:
 ## Compatibilidade
 
 O portfólio é totalmente responsivo e compatível com:
+
 - Chrome, Firefox, Safari, Edge (versões modernas)
 - Dispositivos móveis e tablets (iOS e Android)
 

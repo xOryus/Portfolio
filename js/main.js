@@ -140,7 +140,7 @@ function initializeNavigation() {
         e.preventDefault();
 
         // Fecha menu mobile se estiver aberto
-        if (nav.classList.contains("active")) {
+        if (nav && nav.classList.contains("active")) {
           nav.classList.remove("active");
         }
 
@@ -155,6 +155,19 @@ function initializeNavigation() {
         }
       }
     });
+  });
+
+  // Adiciona evento para fechar o menu ao clicar fora dele
+  document.addEventListener("click", (e) => {
+    // Verifica se o menu está aberto e o clique não foi no menu ou no botão do menu
+    if (
+      nav &&
+      nav.classList.contains("active") &&
+      !e.target.closest("nav") &&
+      !e.target.closest(".menu-toggle")
+    ) {
+      nav.classList.remove("active");
+    }
   });
 
   // Altera o header ao scroll
