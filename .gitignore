@@ -1,0 +1,86 @@
+# Arquivos do sistema e de configuração
+.DS_Store
+Thumbs.db
+desktop.ini
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+config.js
+*.config.json
+
+# Arquivos de log
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+debug.log
+
+# Caches e diretórios temporários
+.cache/
+.temp/
+.tmp/
+tmp/
+temp/
+dist/
+build/
+
+# Dependências e módulos
+node_modules/
+bower_components/
+jspm_packages/
+vendor/
+
+# Arquivos de IDEs e editores
+.idea/
+.vscode/
+*.swp
+*.sublime-*
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.project
+.settings/
+.classpath
+*.iml
+.history
+
+# Arquivos temporários de edição
+*~
+~*
+._*
+
+# Arquivos de credenciais e chaves
+*.pem
+*.key
+*.cert
+*.crt
+
+# Arquivos de pacotes
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Possíveis arquivos sensíveis específicos do projeto
+credentials.json
+secrets.json
+auth.json
+private_key.json
+service-account.json
+
+# Backups
+*.bak
+*.backup
+*.old
+
+# Arquivos específicos do seu projeto
+# Adicione aqui arquivos específicos que você quer ignorar
