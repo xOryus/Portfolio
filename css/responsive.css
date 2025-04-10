@@ -1,0 +1,223 @@
+/* 
+ * RESPONSIVE CSS - ADAPTAÇÃO PARA DISPOSITIVOS
+ * Garante que o portfólio seja responsivo em diferentes tamanhos de tela
+ */
+
+/* Tablets (menor que 1024px) */
+@media (max-width: 1024px) {
+    .section-title {
+        font-size: 2.2rem;
+    }
+
+    .glitch {
+        font-size: 4rem;
+    }
+
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .social-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .social-link {
+        flex: 1 0 45%;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Tablets pequenos e celulares grandes (menor que 768px) */
+@media (max-width: 768px) {
+
+    /* Navegação mobile */
+    nav ul {
+        position: fixed;
+        top: 60px;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background-color: rgba(10, 10, 15, 0.95);
+        backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 3rem 0;
+        transition: right 0.3s ease;
+        z-index: 99;
+    }
+
+    nav.active ul {
+        right: 0;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    nav.active .menu-toggle .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    nav.active .menu-toggle .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    nav.active .menu-toggle .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .glitch {
+        font-size: 3.5rem;
+    }
+
+    .cybr-text {
+        font-size: 1.2rem;
+    }
+
+    .timeline::before {
+        left: 1rem;
+    }
+
+    .timeline-item {
+        padding-left: 3rem;
+    }
+
+    .timeline-item::before {
+        width: 4rem;
+        height: 2rem;
+        font-size: 0.8rem;
+    }
+
+    .timeline-item::after {
+        left: 0.75rem;
+    }
+
+    .certifications-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .wide-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .wide-card .certification-icon {
+        margin: 0 auto 1.5rem;
+    }
+
+    .badge-container {
+        gap: 1.5rem;
+    }
+
+    .badge-img {
+        width: 90px;
+        height: 90px;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Celulares (menor que 576px) */
+@media (max-width: 576px) {
+    :root {
+        font-size: 14px;
+    }
+
+    .section {
+        padding: 4rem 0;
+    }
+
+    .glitch {
+        font-size: 2.8rem;
+        letter-spacing: 3px;
+    }
+
+    .terminal {
+        width: 95%;
+    }
+
+    .timeline-item {
+        padding-left: 2rem;
+    }
+
+    .timeline::before {
+        left: 0.5rem;
+    }
+
+    .timeline-item::before {
+        width: 3rem;
+        font-size: 0.7rem;
+        left: -0.5rem;
+    }
+
+    .timeline-item::after {
+        left: 0.25rem;
+    }
+
+    .social-link {
+        flex: 1 0 100%;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .footer-links {
+        justify-content: center;
+    }
+
+    .certification-card {
+        padding: 1rem;
+    }
+
+    .certification-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .certification-icon i {
+        font-size: 1.5rem;
+    }
+
+    .counter {
+        font-size: 2.5rem;
+    }
+}
+
+/* Celulares pequenos (menor que 375px) */
+@media (max-width: 375px) {
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .glitch {
+        font-size: 2.2rem;
+    }
+
+    .cybr-text {
+        font-size: 1rem;
+    }
+
+    .terminal-content {
+        font-size: 0.8rem;
+        padding: 1rem;
+    }
+
+    .timeline-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .badge-img {
+        width: 70px;
+        height: 70px;
+    }
+}
