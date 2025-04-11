@@ -46,7 +46,7 @@ function initializeParticles() {
           random: true,
           anim: {
             enable: true,
-            speed: 1,
+            speed: 0.5,
             opacity_min: 0.1,
             sync: false,
           },
@@ -56,7 +56,7 @@ function initializeParticles() {
           random: true,
           anim: {
             enable: true,
-            speed: 2,
+            speed: 1,
             size_min: 0.1,
             sync: false,
           },
@@ -91,7 +91,7 @@ function initializeParticles() {
             mode: "grab",
           },
           onclick: {
-            enable: true,
+            enable: false,
             mode: "push",
           },
           resize: true,
@@ -231,9 +231,9 @@ function initializeCounters() {
         rect.top >= 0 &&
         rect.left >= 0 &&
         rect.bottom <=
-          (window.innerHeight || document.documentElement.clientHeight) &&
+        (window.innerHeight || document.documentElement.clientHeight) &&
         rect.right <=
-          (window.innerWidth || document.documentElement.clientWidth)
+        (window.innerWidth || document.documentElement.clientWidth)
       );
     };
 
