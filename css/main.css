@@ -81,7 +81,7 @@ body {
 
     content: '';
 
-    background: linear-gradient(90deg, var( --color-primary) , transparent);
+    background: linear-gradient(90deg, var(--color-primary), transparent);
 }
 
 .accent {
@@ -238,15 +238,18 @@ nav ul {
     position: relative;
 
     display: flex;
-    overflow: visible; /* Alterado de overflow: hidden para visible */
+    overflow: visible;
+    /* Alterado de overflow: hidden para visible */
     align-items: center;
     flex-direction: column;
     justify-content: center;
 
     width: 100%;
     height: auto;
-    min-height: 100vh; /* Alterado para min-height para garantir que cresça conforme o conteúdo */
-    padding: 6rem 0 3rem; /* Ajustado o padding para dar mais espaço */
+    min-height: 100vh;
+    /* Alterado para min-height para garantir que cresça conforme o conteúdo */
+    padding: 6rem 0 3rem;
+    /* Ajustado o padding para dar mais espaço */
 }
 
 .glitch-container {
@@ -287,7 +290,7 @@ nav ul {
     letter-spacing: 2px;
     text-transform: uppercase;
 
-    background: linear-gradient(90deg, var( --color-primary) , var( --color-secondary) );
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
     -webkit-background-clip: text;
 
     -webkit-text-fill-color: transparent;
@@ -690,7 +693,7 @@ nav ul {
 
     padding: 1rem;
 
-    grid-template-columns: repeat(auto-fit, minmax( 250px, 1fr) );
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1rem;
 }
 
@@ -728,7 +731,7 @@ nav ul {
 
     color: var(--color-primary);
     border-bottom: 1px solid rgba(0, 168, 255, 0.1);
-    background: linear-gradient(90deg, rgba( 0, 168, 255, 0.2) , rgba( 0, 168, 255, 0.05) );
+    background: linear-gradient(90deg, rgba(0, 168, 255, 0.2), rgba(0, 168, 255, 0.05));
 
     gap: 8px;
 }
@@ -828,18 +831,18 @@ nav ul {
     animation: progressAnimation 1.5s ease-out forwards;
 
     border-radius: 4px;
-    background: linear-gradient(90deg, var( --color-primary) , var( --color-secondary) );
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
 }
 
 @keyframes progressAnimation {
 
-from {
-    transform: scaleX(0);
-}
+    from {
+        transform: scaleX(0);
+    }
 
-to {
-    transform: scaleX(1);
-}
+    to {
+        transform: scaleX(1);
+    }
 
 }
 
@@ -907,23 +910,23 @@ to {
 
 @keyframes pulse {
 
-0% {
-    transform: scale(1);
+    0% {
+        transform: scale(1);
 
-    opacity: 1;
-}
+        opacity: 1;
+    }
 
-50% {
-    transform: scale(1.2);
+    50% {
+        transform: scale(1.2);
 
-    opacity: 0.6;
-}
+        opacity: 0.6;
+    }
 
-100% {
-    transform: scale(1);
+    100% {
+        transform: scale(1);
 
-    opacity: 1;
-}
+        opacity: 1;
+    }
 
 }
 
@@ -965,7 +968,7 @@ to {
 
     content: '';
 
-    background: linear-gradient(to bottom, var( --color-primary) , var( --color-secondary) );
+    background: linear-gradient(to bottom, var(--color-primary), var(--color-secondary));
 }
 
 .timeline-item {
@@ -980,7 +983,8 @@ to {
     font-weight: 600;
 
     position: absolute;
-    z-index: 1; /* Adicionado para ficar abaixo da bolinha */
+    z-index: 1;
+    /* Adicionado para ficar abaixo da bolinha */
     top: 0;
     left: 0;
 
@@ -1088,7 +1092,7 @@ to {
 .certifications-grid {
     display: grid;
 
-    grid-template-columns: repeat(auto-fill, minmax( 250px, 1fr) );
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.5rem;
 }
 
@@ -1125,7 +1129,7 @@ to {
     margin-bottom: 1.2rem;
 
     border-radius: 50%;
-    background: linear-gradient(45deg, var( --color-primary) , var( --color-secondary) );
+    background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
 }
 
 .certification-icon i {
@@ -1149,27 +1153,21 @@ to {
     color: var(--color-text-muted);
 }
 
+/* Ajuste para o card de graduação */
 .wide-card {
-    display: grid;
-    align-items: center;
-
-    padding: 2rem;
-
-    text-align: left;
-
-    grid-column: 1 / -1;
-    grid-template-columns: auto 1fr;
-    gap: 2rem;
+    grid-column: auto;
+    /* Remove a ocupação de toda a linha */
+    grid-template-columns: none;
+    /* Remove o layout de colunas */
+    text-align: center;
+    /* Centraliza o texto */
+    padding: 1.5rem;
+    /* Ajusta o padding para ser consistente com os outros cards */
 }
 
 .wide-card .certification-icon {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 0;
-}
-
-.wide-card .certification-icon i {
-    font-size: 2.5rem;
+    margin: 0 auto 1.2rem;
+    /* Ajusta o espaçamento inferior para ser consistente */
 }
 
 /* ===== SEÇÃO RECONHECIMENTOS ===== */
@@ -1177,7 +1175,7 @@ to {
 .achievements-container {
     display: grid;
 
-    grid-template-columns: repeat(auto-fit, minmax( 300px, 1fr) );
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
 }
 
@@ -1287,7 +1285,7 @@ to {
 .projects-grid {
     display: grid;
 
-    grid-template-columns: repeat(auto-fill, minmax( 280px, 1fr) );
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 2rem;
 }
 
@@ -1318,7 +1316,7 @@ to {
     padding: 1.5rem;
 
     color: var(--color-text);
-    background: linear-gradient(45deg, var( --color-primary) , var( --color-secondary) );
+    background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
 
     gap: 1rem;
 }
@@ -1515,7 +1513,7 @@ to {
     color: var(--color-text);
     border: none;
     border-radius: 4px;
-    background: linear-gradient(45deg, var( --color-primary) , var( --color-secondary) );
+    background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
 
     gap: 1rem;
 }
@@ -1536,7 +1534,7 @@ to {
     content: '';
     transition: left 0.3s ease;
 
-    background: linear-gradient(45deg, var( --color-secondary) , var( --color-primary) );
+    background: linear-gradient(45deg, var(--color-secondary), var(--color-primary));
 }
 
 .submit-btn:hover::before {
@@ -1639,63 +1637,65 @@ footer {
 
 @keyframes blink {
 
-0%,
-100% {
-    opacity: 1;
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
 }
 
-50% {
-    opacity: 0;
-}
-
-}
 @keyframes bounce {
 
-0%,
-20%,
-50%,
-80%,
-100% {
-    transform: translateY(0) translateX( -50%);
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0) translateX(-50%);
+    }
+
+    40% {
+        transform: translateY(-20px) translateX(-50%);
+    }
+
+    60% {
+        transform: translateY(-10px) translateX(-50%);
+    }
+
 }
 
-40% {
-    transform: translateY(-20px) translateX( -50%);
-}
-
-60% {
-    transform: translateY(-10px) translateX( -50%);
-}
-
-}
 @keyframes glitch {
 
-0% {
-    text-shadow: 0.05em 0 0 var(--color-primary) , -0.05em -0.025em 0 var( --color-secondary) , -0.025em 0.05em 0 var( --color-accent);
-}
+    0% {
+        text-shadow: 0.05em 0 0 var(--color-primary), -0.05em -0.025em 0 var(--color-secondary), -0.025em 0.05em 0 var(--color-accent);
+    }
 
-14% {
-    text-shadow: 0.05em 0 0 var(--color-primary) , -0.05em -0.025em 0 var( --color-secondary) , -0.025em 0.05em 0 var( --color-accent);
-}
+    14% {
+        text-shadow: 0.05em 0 0 var(--color-primary), -0.05em -0.025em 0 var(--color-secondary), -0.025em 0.05em 0 var(--color-accent);
+    }
 
-15% {
-    text-shadow: -0.05em -0.025em 0 var(--color-primary) , 0.025em 0.025em 0 var( --color-secondary) , -0.05em -0.05em 0 var( --color-accent);
-}
+    15% {
+        text-shadow: -0.05em -0.025em 0 var(--color-primary), 0.025em 0.025em 0 var(--color-secondary), -0.05em -0.05em 0 var(--color-accent);
+    }
 
-49% {
-    text-shadow: -0.05em -0.025em 0 var(--color-primary) , 0.025em 0.025em 0 var( --color-secondary) , -0.05em -0.05em 0 var( --color-accent);
-}
+    49% {
+        text-shadow: -0.05em -0.025em 0 var(--color-primary), 0.025em 0.025em 0 var(--color-secondary), -0.05em -0.05em 0 var(--color-accent);
+    }
 
-50% {
-    text-shadow: 0.025em 0.05em 0 var(--color-primary) , 0.05em 0 0 var( --color-secondary) , 0 -0.05em 0 var( --color-accent);
-}
+    50% {
+        text-shadow: 0.025em 0.05em 0 var(--color-primary), 0.05em 0 0 var(--color-secondary), 0 -0.05em 0 var(--color-accent);
+    }
 
-99% {
-    text-shadow: 0.025em 0.05em 0 var(--color-primary) , 0.05em 0 0 var( --color-secondary) , 0 -0.05em 0 var( --color-accent);
-}
+    99% {
+        text-shadow: 0.025em 0.05em 0 var(--color-primary), 0.05em 0 0 var(--color-secondary), 0 -0.05em 0 var(--color-accent);
+    }
 
-100% {
-    text-shadow: -0.025em 0 0 var(--color-primary) , -0.025em -0.025em 0 var( --color-secondary) , -0.025em -0.05em 0 var( --color-accent);
-}
+    100% {
+        text-shadow: -0.025em 0 0 var(--color-primary), -0.025em -0.025em 0 var(--color-secondary), -0.025em -0.05em 0 var(--color-accent);
+    }
 
 }
