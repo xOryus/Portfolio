@@ -40,6 +40,19 @@ body {
     background-color: var(--color-background);
 }
 
+/* Adicionando um wrapper para aplicar o zoom apenas ao conteúdo principal */
+.wrapper {
+    transform: scale(0.9);
+    /* Ajuste o valor para o nível de afastamento desejado */
+    transform-origin: top center;
+    /* Define o ponto de origem do zoom */
+    margin: 0 auto;
+    /* Centraliza o conteúdo */
+    width: 100%;
+    max-width: 1400px;
+    /* Limita a largura máxima */
+}
+
 .container {
     position: relative;
     z-index: 1;
@@ -47,13 +60,13 @@ body {
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0 2rem;
 }
 
 .section {
     position: relative;
 
-    padding: 6rem 0;
+    padding: 8rem 0;
 }
 
 .section-title {
@@ -125,10 +138,6 @@ header {
     top: 0;
     left: 0;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
     width: 100%;
     padding: 1.2rem 0;
 
@@ -146,8 +155,19 @@ header.scrolled {
     background-color: rgba(10, 10, 15, 0.95);
 }
 
+/* Novo container para o conteúdo do header */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
+}
+
 .logo {
-    padding: 0 1.5rem;
+    padding: 0;
 }
 
 .logo-text {
@@ -215,7 +235,7 @@ nav ul {
     display: none;
     flex-direction: column;
 
-    margin-right: 1.5rem;
+    margin-right: 0;
     padding: 0.5rem;
 
     cursor: pointer;
@@ -1584,6 +1604,7 @@ nav ul {
 /* ===== FOOTER ===== */
 
 footer {
+    width: 100%;
     padding: 2rem 0;
 
     border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -1598,7 +1619,8 @@ footer {
 
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0 2rem;
+    width: 100%;
 
     gap: 1rem;
 }

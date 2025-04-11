@@ -162,7 +162,7 @@
     /* Grid de certificações */
 
     .certifications-grid {
-        grid-template-columns: repeat(auto-fill, minmax( 200px, 1fr) );
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
 
     .wide-card {
@@ -178,7 +178,7 @@
     /* Grid de projetos */
 
     .projects-grid {
-        grid-template-columns: repeat(auto-fill, minmax( 250px, 1fr) );
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
 
     /* Contato */
@@ -242,7 +242,7 @@
     }
 
     nav.active .menu-toggle .bar:nth-child(1) {
-        transform: translateY(8px) rotate( 45deg);
+        transform: translateY(8px) rotate(45deg);
     }
 
     nav.active .menu-toggle .bar:nth-child(2) {
@@ -250,7 +250,7 @@
     }
 
     nav.active .menu-toggle .bar:nth-child(3) {
-        transform: translateY(-8px) rotate( -45deg);
+        transform: translateY(-8px) rotate(-45deg);
     }
 
     .glitch {
@@ -283,7 +283,7 @@
     }
 
     .certifications-grid {
-        grid-template-columns: repeat(auto-fill, minmax( 200px, 1fr) );
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
 
     .wide-card {
@@ -567,4 +567,31 @@
     }
 
     /* Removemos a transformação de escala que estava causando problemas */
+}
+
+/* Ajustes para o layout no Desktop */
+@media(min-width: 1024px) {
+    .contact-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 3rem;
+    }
+
+    .contact-form-container {
+        flex: 1;
+    }
+
+    .social-links {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+        flex: 0 0 300px;
+    }
+
+    .social-link {
+        width: 100%;
+    }
 }
