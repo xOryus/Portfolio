@@ -43,14 +43,11 @@ body {
 /* Adicionando um wrapper para aplicar o zoom apenas ao conteúdo principal */
 .wrapper {
     transform: scale(0.9);
-    /* Ajuste o valor para o nível de afastamento desejado */
-    transform-origin: top center;
-    /* Define o ponto de origem do zoom */
+    /* Alterando para center center para evitar espaços vazios grandes no fim do site */
+    transform-origin: center center;
     margin: 0 auto;
-    /* Centraliza o conteúdo */
     width: 100%;
     max-width: 1400px;
-    /* Limita a largura máxima */
 }
 
 .container {
@@ -63,10 +60,16 @@ body {
     padding: 0 2rem;
 }
 
+/* Ajuste nas seções para evitar padding excessivo */
 .section {
     position: relative;
-
     padding: 8rem 0;
+}
+
+/* Ajuste específico para última seção (contato) */
+#contact.section {
+    padding-bottom: 4rem;
+    /* Reduz o padding inferior na seção de contato */
 }
 
 .section-title {
@@ -259,7 +262,6 @@ nav ul {
 
     display: flex;
     overflow: visible;
-    /* Alterado de overflow: hidden para visible */
     align-items: center;
     flex-direction: column;
     justify-content: center;
@@ -267,14 +269,17 @@ nav ul {
     width: 100%;
     height: auto;
     min-height: 100vh;
-    /* Alterado para min-height para garantir que cresça conforme o conteúdo */
-    padding: 6rem 0 3rem;
-    /* Ajustado o padding para dar mais espaço */
+    /* Aumentado para criar mais espaço abaixo do header fixo */
+    padding-bottom: 3rem;
+    margin-top: -12rem;
+    /* Espaço suficiente para evitar sobreposição do header */
 }
 
 .glitch-container {
-    margin-bottom: 2.5rem;
-
+    margin-top: -2rem;
+    /* Ajustado para reduzir espaço superior excessivo */
+    margin-bottom: 2rem;
+    /* Reduzido ligeiramente */
     text-align: center;
 }
 
@@ -629,8 +634,8 @@ nav ul {
 
     width: 100%;
     max-width: 100%;
-    margin: 2rem auto;
-
+    margin: 1.5rem auto 2rem;
+    /* Ajustado para melhor distribuição de espaços */
     border: 1px solid rgba(0, 168, 255, 0.3);
     border-radius: 10px;
     background-color: rgba(8, 13, 24, 0.85);
@@ -1606,9 +1611,14 @@ nav ul {
 footer {
     width: 100%;
     padding: 2rem 0;
-
+    margin-top: -1rem;
+    /* Ajuste para reduzir o espaço entre o conteúdo e o footer */
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     background-color: rgba(15, 15, 25, 0.9);
+    position: relative;
+    /* Garante que o footer mantenha sua posição relativa ao conteúdo */
+    z-index: 1;
+    /* Evita problemas de sobreposição com outros elementos */
 }
 
 .footer-content {
