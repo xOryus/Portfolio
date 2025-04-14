@@ -1449,8 +1449,8 @@ nav ul {
 
 .input-group textarea {
     min-height: 150px;
-
-    resize: vertical;
+    resize: none;
+    /* Alterado de 'vertical' para 'none' para impedir o redimensionamento */
 }
 
 .input-group input:focus,
