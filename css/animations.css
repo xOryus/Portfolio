@@ -1,6 +1,7 @@
 /*
  * ANIMATIONS CSS - EFEITOS VISUAIS CYBERSECURITY
- * Animações e efeitos visuais para o portfólio com tema hacker
+ * Animações e efeitos visuais para o portfólio com tema hacker - VERSÃO OTIMIZADA
+ * Implementa animações com alta performance usando propriedades específicas para GPU
 */
 
 /* Efeito Matrix (chuva digital) */
@@ -9,24 +10,29 @@
     position: absolute;
     top: 0;
     left: 0;
-
     width: 100%;
     height: 100%;
-
     pointer-events: none;
+    /* Aceleração de hardware */
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 .matrix-rain canvas {
     display: block;
-
     width: 100%;
     height: 100%;
+    /* Aceleração de hardware */
+    transform: translateZ(0);
 }
 
-/* Efeito Glitch */
+/* Efeito Glitch - Versão otimizada */
 
 .glitch {
     position: relative;
+    /* Adiciona aceleração de hardware */
+    transform: translate3d(0, 0, 0);
+    will-change: transform, text-shadow;
 }
 
 .glitch::before,
@@ -34,221 +40,144 @@
     position: absolute;
     top: 0;
     left: 0;
-
     clip: rect(0, 0, 0, 0);
-
     width: 100%;
     height: 100%;
-
     content: attr(data-text);
+    /* Reduz CPU utilizando a propriedade transform */
+    transform: translate3d(0, 0, 0);
+    will-change: clip, transform;
 }
 
 .glitch::before {
     left: 2px;
-
-    animation: glitch-anim-1 2s infinite linear alternate-reverse;
-
+    animation: glitch-anim-1 5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite alternate-reverse;
     text-shadow: -2px 0 var(--color-secondary);
 }
 
 .glitch::after {
     left: -2px;
-
-    animation: glitch-anim-2 3s infinite linear alternate-reverse;
-
+    animation: glitch-anim-2 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite alternate-reverse;
     text-shadow: -2px 0 var(--color-accent);
 }
 
+/* Versão mais eficiente e elegante para efeito glitch */
+.active-glitch::before {
+    animation: glitch-anim-1 0.3s ease-in-out infinite alternate-reverse;
+}
+
+.active-glitch::after {
+    animation: glitch-anim-2 0.2s ease-in-out infinite alternate-reverse;
+}
+
+/* Animações Glitch mais suaves e eficientes */
 @keyframes glitch-anim-1 {
 
-    0% {
+    0%,
+    12%,
+    22%,
+    32%,
+    42%,
+    52%,
+    62%,
+    72%,
+    82%,
+    92% {
         clip: rect(30px, 9999px, 10px, 0);
+        transform: translateX(0px);
     }
 
-    5% {
-        clip: rect(19px, 9999px, 75px, 0);
-    }
-
-    10% {
-        clip: rect(93px, 9999px, 30px, 0);
-    }
-
-    15% {
-        clip: rect(24px, 9999px, 74px, 0);
-    }
-
-    20% {
-        clip: rect(76px, 9999px, 5px, 0);
-    }
-
-    25% {
-        clip: rect(92px, 9999px, 60px, 0);
-    }
-
-    30% {
-        clip: rect(49px, 9999px, 27px, 0);
-    }
-
-    35% {
-        clip: rect(24px, 9999px, 76px, 0);
-    }
-
-    40% {
-        clip: rect(88px, 9999px, 96px, 0);
-    }
-
-    45% {
-        clip: rect(10px, 9999px, 28px, 0);
-    }
-
-    50% {
-        clip: rect(52px, 9999px, 67px, 0);
-    }
-
-    55% {
-        clip: rect(47px, 9999px, 39px, 0);
-    }
-
-    60% {
-        clip: rect(2px, 9999px, 19px, 0);
-    }
-
-    65% {
-        clip: rect(15px, 9999px, 2px, 0);
-    }
-
-    70% {
-        clip: rect(57px, 9999px, 88px, 0);
-    }
-
-    75% {
-        clip: rect(17px, 9999px, 49px, 0);
-    }
-
-    80% {
-        clip: rect(41px, 9999px, 32px, 0);
-    }
-
-    85% {
-        clip: rect(29px, 9999px, 46px, 0);
-    }
-
-    90% {
-        clip: rect(54px, 9999px, 18px, 0);
-    }
-
+    5%,
+    15%,
+    25%,
+    35%,
+    45%,
+    55%,
+    65%,
+    75%,
+    85%,
     95% {
-        clip: rect(45px, 9999px, 24px, 0);
+        clip: rect(76px, 9999px, 5px, 0);
+        transform: translateX(-2px);
     }
 
+    10%,
+    20%,
+    30%,
+    40%,
+    50%,
+    60%,
+    70%,
+    80%,
+    90%,
     100% {
-        clip: rect(86px, 9999px, 38px, 0);
+        clip: rect(92px, 9999px, 60px, 0);
+        transform: translateX(2px);
     }
-
 }
 
 @keyframes glitch-anim-2 {
 
-    0% {
+    0%,
+    12%,
+    22%,
+    32%,
+    42%,
+    52%,
+    62%,
+    72%,
+    82%,
+    92% {
         clip: rect(73px, 9999px, 75px, 0);
+        transform: translateX(0px);
     }
 
-    5% {
-        clip: rect(91px, 9999px, 14px, 0);
-    }
-
-    10% {
-        clip: rect(84px, 9999px, 6px, 0);
-    }
-
-    15% {
-        clip: rect(82px, 9999px, 74px, 0);
-    }
-
-    20% {
-        clip: rect(93px, 9999px, 53px, 0);
-    }
-
-    25% {
-        clip: rect(7px, 9999px, 37px, 0);
-    }
-
-    30% {
-        clip: rect(51px, 9999px, 64px, 0);
-    }
-
-    35% {
-        clip: rect(48px, 9999px, 96px, 0);
-    }
-
-    40% {
-        clip: rect(76px, 9999px, 62px, 0);
-    }
-
-    45% {
-        clip: rect(93px, 9999px, 19px, 0);
-    }
-
-    50% {
-        clip: rect(19px, 9999px, 69px, 0);
-    }
-
-    55% {
-        clip: rect(47px, 9999px, 30px, 0);
-    }
-
-    60% {
-        clip: rect(45px, 9999px, 35px, 0);
-    }
-
-    65% {
-        clip: rect(89px, 9999px, 25px, 0);
-    }
-
-    70% {
-        clip: rect(58px, 9999px, 94px, 0);
-    }
-
-    75% {
-        clip: rect(85px, 9999px, 71px, 0);
-    }
-
-    80% {
-        clip: rect(86px, 9999px, 44px, 0);
-    }
-
-    85% {
-        clip: rect(46px, 9999px, 56px, 0);
-    }
-
-    90% {
-        clip: rect(6px, 9999px, 85px, 0);
-    }
-
+    5%,
+    15%,
+    25%,
+    35%,
+    45%,
+    55%,
+    65%,
+    75%,
+    85%,
     95% {
-        clip: rect(34px, 9999px, 41px, 0);
+        clip: rect(47px, 9999px, 30px, 0);
+        transform: translateX(-2px);
     }
 
+    10%,
+    20%,
+    30%,
+    40%,
+    50%,
+    60%,
+    70%,
+    80%,
+    90%,
     100% {
-        clip: rect(95px, 9999px, 69px, 0);
+        clip: rect(86px, 9999px, 44px, 0);
+        transform: translateX(2px);
     }
-
 }
 
-/* Efeito de digitação no terminal */
+/* Efeito de digitação no terminal - Versão otimizada */
 
 .typing {
     display: inline-block;
     overflow: hidden;
-
-    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
     white-space: nowrap;
-
     border-right: 3px solid var(--color-primary);
+    /* Melhora desempenho */
+    will-change: width;
+}
+
+.typing-done {
+    border-right: 3px solid var(--color-primary);
+    animation: blink-caret 0.75s step-end infinite;
 }
 
 @keyframes typing {
-
     from {
         width: 0;
     }
@@ -256,7 +185,6 @@
     to {
         width: 100%;
     }
-
 }
 
 @keyframes blink-caret {
@@ -269,107 +197,113 @@
     50% {
         border-color: var(--color-primary);
     }
-
 }
 
-/* Efeito de hover nas cards */
+/* Efeito de hover nas cards - Versão otimizada */
 
 .hover-glow {
-    transition: all 0.3s ease;
+    /* Transição melhorada para GPU */
+    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
+        box-shadow 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    will-change: transform, box-shadow;
 }
 
 .hover-glow:hover {
     transform: translateY(-5px);
-
-    box-shadow: 0 0 15px var(--color-primary);
+    box-shadow: 0 8px 25px rgba(0, 168, 255, 0.4);
 }
 
-/* Efeito de carregamento */
+/* Efeito de carregamento - Versão otimizada */
 
 .loading {
     position: relative;
-
     overflow: hidden;
-
     width: 150px;
     height: 4px;
     margin: 20px auto;
-
     border-radius: 2px;
     background-color: rgba(255, 255, 255, 0.1);
+    /* Melhora desempenho */
+    will-change: opacity;
 }
 
 .loading::after {
     position: absolute;
     top: 0;
     left: -50%;
-
     width: 50%;
     height: 100%;
-
     content: '';
-    animation: loading 1.5s infinite;
-
+    /* Transição mais suave e hardware accelerated */
+    animation: loading 1.5s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+    will-change: transform, opacity;
     background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
 }
 
 @keyframes loading {
-
     0% {
-        left: -50%;
+        transform: translateX(0);
     }
 
     100% {
-        left: 150%;
+        transform: translateX(400%);
     }
-
 }
 
-/* Scanlines (efeito de linhas horizontais) */
+/* Scanlines (efeito de linhas horizontais) - Versão otimizada */
 
 .scanlines {
     position: fixed;
     z-index: 9;
     top: 0;
     left: 0;
-
     width: 100%;
     height: 100%;
-
     pointer-events: none;
-
-    opacity: 0.15;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.02) 50%);
+    opacity: 0.08;
+    /* Reduzido para melhor leitura */
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.04) 50%);
     background-size: 100% 4px;
+    /* Aceleração de hardware */
+    transform: translateZ(0);
 }
 
-/* Efeito de texto neon */
+/* Efeito de texto neon - Versão otimizada */
 
 .neon-text {
-    animation: neon-pulse 2s infinite alternate;
-
+    animation: neon-pulse 2s infinite alternate cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    will-change: text-shadow;
     color: var(--color-text);
-    text-shadow: 0 0 5px var(--color-text), 0 0 10px var(--color-text), 0 0 20px var(--color-primary), 0 0 30px var(--color-primary), 0 0 40px var(--color-primary);
+    text-shadow: 0 0 5px var(--color-text),
+        0 0 10px var(--color-text),
+        0 0 20px var(--color-primary),
+        0 0 30px var(--color-primary);
 }
 
 @keyframes neon-pulse {
-
     from {
-        text-shadow: 0 0 5px var(--color-text), 0 0 10px var(--color-text), 0 0 20px var(--color-primary), 0 0 30px var(--color-primary);
+        text-shadow: 0 0 5px var(--color-text),
+            0 0 10px var(--color-text),
+            0 0 20px var(--color-primary),
+            0 0 30px var(--color-primary);
     }
 
     to {
-        text-shadow: 0 0 5px var(--color-text), 0 0 10px var(--color-text), 0 0 20px var(--color-primary), 0 0 30px var(--color-primary), 0 0 40px var(--color-primary), 0 0 50px var(--color-primary);
+        text-shadow: 0 0 5px var(--color-text),
+            0 0 10px var(--color-text),
+            0 0 25px var(--color-primary),
+            0 0 35px var(--color-primary),
+            0 0 45px var(--color-primary);
     }
-
 }
 
-/* Efeito de escaneamento (para cards) */
+/* Efeito de escaneamento (para cards) - Versão otimizada */
 
 .scan-effect {
     position: relative;
-
     overflow: hidden;
+    /* Melhora desempenho */
+    will-change: transform;
 }
 
 .scan-effect::before {
@@ -377,66 +311,100 @@
     z-index: 1;
     top: -100%;
     left: 0;
-
     width: 100%;
     height: 10px;
-
     content: '';
-    animation: scanning 3s ease-in-out infinite;
-
-    background: linear-gradient(to bottom, rgba(0, 168, 255, 0), rgba(0, 168, 255, 0.2), rgba(0, 168, 255, 0));
+    /* Animação mais suave */
+    animation: scanning 3s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    will-change: transform, opacity;
+    background: linear-gradient(to bottom,
+            rgba(0, 168, 255, 0),
+            rgba(0, 168, 255, 0.3),
+            rgba(0, 168, 255, 0));
 }
 
 @keyframes scanning {
-
     0% {
-        top: -5%;
+        transform: translateY(0);
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 0.8;
     }
 
     100% {
-        top: 105%;
+        transform: translateY(1000%);
+        opacity: 0.5;
     }
-
 }
 
-/* Efeito de grid digital (usado como background) */
+/* Efeito de grid digital (usado como background) - Versão otimizada */
 
 .digital-grid {
     position: absolute;
     z-index: -1;
     top: 0;
     left: 0;
-
     width: 100%;
     height: 100%;
-
-    background-image: linear-gradient(rgba(0, 168, 255, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 168, 255, 0.07) 1px, transparent 1px);
+    /* Aceleração de hardware */
+    transform: translateZ(0);
+    will-change: opacity;
+    background-image: linear-gradient(rgba(0, 168, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 168, 255, 0.05) 1px, transparent 1px);
     background-size: 30px 30px;
 }
 
-/* Efeito de estática na página */
+/* Grid dots */
+.grid-dot {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background-color: rgba(0, 168, 255, 0.6);
+    animation: pulse-dot 3s ease-in-out infinite;
+    will-change: opacity, transform;
+}
+
+@keyframes pulse-dot {
+
+    0%,
+    100% {
+        opacity: 0.2;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.2);
+    }
+}
+
+/* Efeito de estática na página - Versão otimizada */
 
 .static-effect {
     position: fixed;
     z-index: 8;
     top: 0;
     left: 0;
-
     width: 100%;
     height: 100%;
-
     pointer-events: none;
-
-    opacity: 0.03;
+    opacity: 0.02;
+    /* Reduzido para melhor performance */
+    /* Aceleração de hardware */
+    transform: translateZ(0);
     background-image: url("data:image/svg+xml, %3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url( %23noiseFilter) '/%3E%3C/svg%3E");
 }
 
-/* Efeito circular nos botões */
+/* Efeito circular nos botões - Versão otimizada */
 
 .circle-effect {
     position: relative;
-
     overflow: hidden;
+    /* Aceleração de hardware */
+    will-change: transform;
 }
 
 .circle-effect::before {
@@ -444,28 +412,30 @@
     z-index: 0;
     top: 50%;
     left: 50%;
-
     width: 0;
     height: 0;
-
     content: '';
-    transition: width 0.6s ease, height 0.6s ease;
+    /* Transição mais suave */
+    transition: width 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
+        height 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
     transform: translate(-50%, -50%);
-
+    will-change: width, height, opacity;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.1);
 }
 
 .circle-effect:hover::before {
-    width: 200%;
-    height: 200%;
+    width: 220%;
+    height: 220%;
 }
 
-/* Efeito de contorno no hover */
+/* Efeito de contorno no hover - Versão otimizada */
 
 .outline-hover {
     position: relative;
     z-index: 1;
+    /* Aceleração de hardware */
+    will-change: transform;
 }
 
 .outline-hover::before {
@@ -475,10 +445,10 @@
     right: -3px;
     bottom: -3px;
     left: -3px;
-
     content: '';
-    transition: opacity 0.3s ease;
-
+    /* Transição mais suave */
+    transition: opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    will-change: opacity;
     opacity: 0;
     border: 1px solid var(--color-primary);
 }
@@ -487,127 +457,171 @@
     opacity: 0.3;
 }
 
-/* Efeito slide para cards */
+/* Efeito slide para cards - Versão otimizada */
 
 @keyframes slide-up {
-
     0% {
         transform: translateY(30px);
-
         opacity: 0;
     }
 
     100% {
         transform: translateY(0);
-
         opacity: 1;
     }
-
 }
 
 .slide-up {
-    animation: slide-up 0.9s ease forwards;
+    animation: slide-up 0.7s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    will-change: transform, opacity;
 }
 
-/* Efeito contador */
-
-@keyframes count-up {
-
-    from {
-        content: "0";
-    }
-
-    to {
-        content: attr(data-count);
-    }
-
+/* Animações para elementos específicos */
+.certification-card {
+    will-change: transform, box-shadow;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.count-up::after {
-    content: "0";
-    animation: count-up 2.5s forwards ease-out;
+.timeline-content,
+.project-card {
+    will-change: transform, opacity;
 }
 
-/*
- * ANIMATIONS.CSS - PORTFÓLIO CYBERSECURITY
- * Animações e efeitos visuais para o portfólio
-*/
+.badge {
+    will-change: transform;
+}
 
-/* Efeito Glitch para o título da página */
-
-@keyframes glitch {
-
+/* Animação aprimorada para cards de certificação e badges - VERSÃO SUPER SUAVE */
+@keyframes card-fade-in {
     0% {
-        text-shadow: 0.05em 0 0 rgba(0, 168, 255, 0.75), -0.05em -0.025em 0 rgba(24, 230, 199, 0.75), -0.025em 0.05em 0 rgba(255, 0, 60, 0.75);
-    }
-
-    14% {
-        text-shadow: 0.05em 0 0 rgba(0, 168, 255, 0.75), -0.05em -0.025em 0 rgba(24, 230, 199, 0.75), -0.025em 0.05em 0 rgba(255, 0, 60, 0.75);
-    }
-
-    15% {
-        text-shadow: -0.05em -0.025em 0 rgba(0, 168, 255, 0.75), 0.025em 0.025em 0 rgba(24, 230, 199, 0.75), -0.05em -0.05em 0 rgba(255, 0, 60, 0.75);
-    }
-
-    49% {
-        text-shadow: -0.05em -0.025em 0 rgba(0, 168, 255, 0.75), 0.025em 0.025em 0 rgba(24, 230, 199, 0.75), -0.05em -0.05em 0 rgba(255, 0, 60, 0.75);
+        opacity: 0;
+        transform: translateY(40px) scale(0.96);
+        filter: blur(5px);
     }
 
     50% {
-        text-shadow: 0.025em 0.05em 0 rgba(0, 168, 255, 0.75), 0.05em 0 0 rgba(24, 230, 199, 0.75), 0 -0.05em 0 rgba(255, 0, 60, 0.75);
+        opacity: 0.8;
+        filter: blur(1px);
     }
 
-    99% {
-        text-shadow: 0.025em 0.05em 0 rgba(0, 168, 255, 0.75), 0.05em 0 0 rgba(24, 230, 199, 0.75), 0 -0.05em 0 rgba(255, 0, 60, 0.75);
-    }
-
-    100% {
-        text-shadow: -0.025em 0 0 rgba(0, 168, 255, 0.75), -0.025em -0.025em 0 rgba(24, 230, 199, 0.75), -0.025em -0.05em 0 rgba(255, 0, 60, 0.75);
-    }
-
-}
-
-/* Efeito de piscada para cursor e acentos */
-
-@keyframes blink {
-
-    0%,
     100% {
         opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* Classes específicas para animação suave dos cards */
+.certification-card.slide-up,
+.badge.slide-up {
+    animation: none;
+    /* Remove animação anterior */
+    animation: card-fade-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    will-change: transform, opacity, filter;
+}
+
+/* Aplicando efeito cascata aos cards de certificação */
+.certification-card:nth-child(1).slide-up {
+    animation-delay: 0.05s;
+}
+
+.certification-card:nth-child(2).slide-up {
+    animation-delay: 0.1s;
+}
+
+.certification-card:nth-child(3).slide-up {
+    animation-delay: 0.15s;
+}
+
+.certification-card:nth-child(4).slide-up {
+    animation-delay: 0.2s;
+}
+
+.certification-card:nth-child(5).slide-up {
+    animation-delay: 0.25s;
+}
+
+/* Efeito mais suave para os badges de reconhecimento */
+.badge.slide-up {
+    animation-duration: 1.1s;
+    /* Ligeiramente mais lento para efeito mais suave */
+}
+
+.badge:nth-child(1).slide-up {
+    animation-delay: 0.05s;
+}
+
+.badge:nth-child(2).slide-up {
+    animation-delay: 0.2s;
+}
+
+/* Animação de entrada e brilho para cards */
+@keyframes card-glow {
+    0% {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
 
     50% {
-        opacity: 0;
+        box-shadow: 0 8px 25px rgba(0, 168, 255, 0.4);
     }
 
-}
-
-/* Animação de deslizamento para scroll indicator */
-
-@keyframes bounce {
-
-    0%,
-    20%,
-    50%,
-    80%,
     100% {
-        transform: translateY(0);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
-
-    40% {
-        transform: translateY(-10px);
-    }
-
-    60% {
-        transform: translateY(-5px);
-    }
-
 }
 
-/* Contador de números animado */
+.certification-card.slide-up {
+    animation: card-fade-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+        card-glow 3s ease-in-out 0.9s infinite;
+}
+
+/* Efeito especial para contadores em Reconhecimentos */
+.counter-container {
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes counter-reveal {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+        filter: blur(4px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+.counter.visible-counter .counter-value,
+.counter.visible-counter .counter-prefix,
+.counter.visible-counter .counter-suffix {
+    animation: counter-reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.counter.visible-counter .counter-prefix {
+    animation-delay: 0.1s;
+}
+
+.counter.visible-counter .counter-value {
+    animation-delay: 0.3s;
+}
+
+.counter.visible-counter .counter-suffix {
+    animation-delay: 0.5s;
+}
+
+.social-link:hover {
+    transform: translateX(8px);
+    transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Contador de números animado - Versão otimizada */
 
 @keyframes countUp {
-
     from {
         content: "0";
     }
@@ -615,13 +629,11 @@
     to {
         content: attr(data-target);
     }
-
 }
 
 /* Animação de entrada suave para elementos */
 
 @keyframes fadeIn {
-
     from {
         opacity: 0;
     }
@@ -629,225 +641,322 @@
     to {
         opacity: 1;
     }
-
 }
 
-/* Animação de entrada de baixo para cima */
+/* Animação de entrada de baixo para cima - Versão otimizada */
 
 @keyframes fadeInUp {
-
     from {
         transform: translateY(30px);
-
         opacity: 0;
     }
 
     to {
         transform: translateY(0);
-
         opacity: 1;
     }
-
 }
 
-/* Animação de entrada da esquerda */
+/* Animação de entrada da esquerda - Versão otimizada */
 
 @keyframes fadeInLeft {
-
     from {
         transform: translateX(-30px);
-
         opacity: 0;
     }
 
     to {
         transform: translateX(0);
-
         opacity: 1;
     }
-
 }
 
-/* Animação de entrada da direita */
+/* Animação de entrada da direita - Versão otimizada */
 
 @keyframes fadeInRight {
-
     from {
         transform: translateX(30px);
-
         opacity: 0;
     }
 
     to {
         transform: translateX(0);
-
         opacity: 1;
     }
-
 }
 
-/* Animação de pulsar para indicadores */
+/* Animação de pulsar para indicadores - Versão otimizada */
 
 @keyframes pulse {
-
     0% {
-        transform: scale(0.8);
-
-        opacity: 0.5;
+        transform: scale(0.9);
+        opacity: 0.6;
     }
 
     50% {
-        transform: scale(1);
-
+        transform: scale(1.1);
         opacity: 1;
     }
 
     100% {
-        transform: scale(0.8);
-
-        opacity: 0.5;
+        transform: scale(0.9);
+        opacity: 0.6;
     }
-
 }
 
-/* Animação do indicador de scroll */
+/* Animação do indicador de scroll - Versão otimizada */
 
 .scroll-indicator {
-    animation: bounce 2s infinite;
+    animation: bounce 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+    will-change: transform;
 }
 
-/* Animação dos cartões de projetos */
+/* Animação dos cartões de projetos - Versão otimizada */
 
 .project-card {
-    animation: fadeInUp 0.8s both;
+    animation: fadeInUp 0.8s cubic-bezier(0.19, 1, 0.22, 1) both;
     animation-delay: calc(var(--i, 0) * 0.1s);
+    will-change: transform, opacity;
 }
 
-/* Animações para timeline */
+/* Animações para timeline - Versão otimizada */
 
 .timeline-item {
-    animation: fadeInLeft 0.8s forwards;
-
+    animation: fadeInLeft 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
     opacity: 0;
+    will-change: transform, opacity;
 }
 
-/* Aplicação progressiva das animações conforme scroll */
+/* Redução de movimento para acessibilidade */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    ::before,
+    ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .animate-on-scroll {
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+
+    .glitch::before,
+    .glitch::after {
+        display: none !important;
+    }
+}
+
+/* Modo de animações reduzidas */
+.reduced-motion *,
+.reduced-motion ::before,
+.reduced-motion ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+}
+
+/* Aplicação progressiva das animações conforme scroll - Versão otimizada */
 
 @media(prefers-reduced-motion: no-preference) {
     .animate-on-scroll {
-        transition: opacity 0.6s, transform 0.6s;
-
+        transition: opacity 0.6s cubic-bezier(0.19, 1, 0.22, 1),
+            transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        will-change: transform, opacity;
         opacity: 0;
     }
 
     .animate-on-scroll.fade-in {
         transform: translateY(20px);
-
         opacity: 0;
     }
 
     .animate-on-scroll.fade-in-left {
         transform: translateX(-20px);
-
         opacity: 0;
     }
 
     .animate-on-scroll.fade-in-right {
         transform: translateX(20px);
-
         opacity: 0;
     }
 
     .animate-on-scroll.animate {
         transform: translate(0, 0);
-
         opacity: 1;
     }
 }
 
-/* Security Dashboard Animations */
+/* Security Dashboard Animations - Versão otimizada */
 
 .security-dashboard {
-    animation: fadeIn 0.8s;
+    animation: fadeIn 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    will-change: transform, opacity;
 }
 
 .dashboard-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
+        box-shadow 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    will-change: transform, box-shadow;
 }
 
 .radar-metric .metric-bar::before {
-    animation: growBar 1.5s cubic-bezier(0.11, 0.64, 0.33, 1.23);
+    animation: growBar 1.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+    will-change: width;
 }
 
 @keyframes growBar {
-
     from {
         width: 0;
+        opacity: 0.7;
     }
 
     to {
         width: var(--percentage);
+        opacity: 1;
     }
-
 }
 
 .status-indicator {
-    animation: pulse 2s infinite;
+    animation: pulse 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+    will-change: transform, opacity;
 }
 
 .tag {
     animation-name: fadeInUp;
     animation-duration: 0.5s;
-
+    animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
     animation-fill-mode: both;
+    will-change: transform, opacity;
 }
 
-/* Security Dashboard Cards Staggered Animation */
+/* Security Dashboard Cards Staggered Animation - Versão otimizada */
 
 .dashboard-card:nth-child(1) {
-    animation-delay: 0.2s;
+    animation-delay: 0.1s;
 }
 
 .dashboard-card:nth-child(2) {
-    animation-delay: 0.4s;
+    animation-delay: 0.2s;
 }
 
 .dashboard-card:nth-child(3) {
-    animation-delay: 0.6s;
+    animation-delay: 0.3s;
 }
 
-/* Efeito de digitação no terminal */
-
-.typing {
-    overflow: hidden;
-
-    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-    white-space: nowrap;
-
-    border-right: 0.15em solid var(--color-primary);
+.dashboard-card:nth-child(4) {
+    animation-delay: 0.4s;
 }
 
-@keyframes typing {
-
+/* Skill progress animation */
+@keyframes progressAnimation {
     from {
-        width: 0;
+        transform: scaleX(0);
+        opacity: 0.8;
     }
 
     to {
-        width: 100%;
+        transform: scaleX(1);
+        opacity: 1;
     }
-
 }
 
-@keyframes blink-caret {
+.skill-progress {
+    animation: progressAnimation 1.2s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+    will-change: transform;
+}
 
-    from,
-    to {
-        border-color: transparent;
+/* Efeito de Glitch para imagens */
+.glitch-image {
+    will-change: transform;
+}
+
+.glitch-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    will-change: transform, clip-path;
+}
+
+.glitch-layer-1 {
+    left: -2px;
+    background-color: transparent;
+}
+
+.glitch-layer-2 {
+    left: 2px;
+    background-color: transparent;
+}
+
+.glitching .glitch-layer-1 {
+    animation: glitch-image-1 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite both;
+}
+
+.glitching .glitch-layer-2 {
+    animation: glitch-image-2 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite both;
+}
+
+@keyframes glitch-image-1 {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+        clip-path: inset(0% 0% 0% 0%);
+    }
+
+    20% {
+        clip-path: inset(20% 0% 0% 0%);
+        transform: translateX(-2px);
+    }
+
+    40% {
+        clip-path: inset(40% 0% 0% 0%);
+        transform: translateX(2px);
+    }
+
+    60% {
+        clip-path: inset(60% 0% 0% 0%);
+        transform: translateX(-2px);
+    }
+
+    80% {
+        clip-path: inset(80% 0% 0% 0%);
+        transform: translateX(2px);
+    }
+}
+
+@keyframes glitch-image-2 {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+        clip-path: inset(0% 0% 0% 0%);
+    }
+
+    25% {
+        clip-path: inset(0% 0% 25% 0%);
+        transform: translateX(2px);
     }
 
     50% {
-        border-color: var(--color-primary);
+        clip-path: inset(0% 25% 0% 0%);
+        transform: translateX(-2px);
     }
 
+    75% {
+        clip-path: inset(0% 0% 0% 25%);
+        transform: translateX(2px);
+    }
 }
