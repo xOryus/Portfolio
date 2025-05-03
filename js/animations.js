@@ -173,152 +173,185 @@ function initCounterAnimations(reducedMotion = false) {
           }
         });
       },
-      {
-        threshold: 0.1,
-      }
+      { threshold: 0.1 }
     );
 
     observer.observe(counter);
   });
+}
 
-  function animateCounter(counterElement, isReducedMotion) {
-    // Obtém o valor alvo como string para preservar formatação
-    const targetString = counterElement.getAttribute("data-target");
-    const counterDisplay =
-      counterElement.querySelector(".counter-value") || counterElement;
+// Analisa o valor alvo do contador para extração correta de formatação
+function parseCounterValue(targetString) {
+  // Detecta se é um contador de moeda
+  const isCurrency =
+    targetString.includes("$") ||
+    targetString.includes("€") ||
+    targetString.includes("£") ||
+    targetString.includes("¥");
 
-    // Detecta se é um contador de moeda
-    const isCurrency =
-      targetString.includes("$") ||
-      targetString.includes("€") ||
-      targetString.includes("£") ||
-      targetString.includes("¥");
+  // Objeto para armazenar resultado da análise
+  const result = {
+    isCurrency,
+    prefix: "",
+    suffix: "",
+    targetNumber: 0,
+  };
 
-    // Processa corretamente o valor com formatação
-    let prefix = "",
-      suffix = "",
-      targetNumber;
-
-    if (isCurrency) {
-      // Extrai símbolo de moeda/prefixo e valor numérico
-      const currencyMatch = targetString.match(/^([^\d]*)(\d[\d,.]*)([^\d]*)$/);
-      if (currencyMatch) {
-        prefix = currencyMatch[1]; // Símbolo de moeda ou prefixo
-        const numericPart = currencyMatch[2].replace(/,/g, ""); // Remove vírgulas
-        targetNumber = parseFloat(numericPart);
-        suffix = currencyMatch[3]; // Qualquer sufixo
-      } else {
-        // Fallback se a correspondência falhar
-        targetNumber = parseFloat(targetString.replace(/[^\d.]/g, ""));
-      }
+  if (isCurrency) {
+    // Extrai símbolo de moeda/prefixo e valor numérico
+    const currencyMatch = targetString.match(/^([^\d]*)(\d[\d,.]*)([^\d]*)$/);
+    if (currencyMatch) {
+      result.prefix = currencyMatch[1]; // Símbolo de moeda ou prefixo
+      const numericPart = currencyMatch[2].replace(/,/g, ""); // Remove vírgulas
+      result.targetNumber = parseFloat(numericPart);
+      result.suffix = currencyMatch[3]; // Qualquer sufixo
     } else {
-      // Número regular
-      targetNumber = parseInt(targetString.replace(/[^\d]/g, ""), 10);
+      // Fallback se a correspondência falhar
+      result.targetNumber = parseFloat(targetString.replace(/[^\d.]/g, ""));
     }
-
-    // Padrão para 0 se a análise falhar
-    if (isNaN(targetNumber)) {
-      targetNumber = 0;
-    }
-
-    // Para movimento reduzido, apenas defina o valor final
-    if (isReducedMotion) {
-      if (isCurrency) {
-        counterDisplay.textContent =
-          prefix + formatNumber(targetNumber.toFixed(2)) + suffix;
-      } else {
-        counterDisplay.textContent = formatNumber(targetNumber);
-      }
-      counterElement.classList.add("visible-counter", "counter-complete");
-      return;
-    }
-
-    // Mostrar elementos de contador inicialmente
-    counterElement.classList.add("visible-counter");
-
-    // Configuração de animação
-    const duration = 2500; // Duração da animação em ms
-    const framesPerSecond = 60;
-    const totalFrames = (duration / 1000) * framesPerSecond;
-    let currentFrame = 0;
-
-    // Função de easing personalizada para movimento natural
-    const easeOutExpo = (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
-
-    // Para formatar números com vírgulas
-    function formatNumber(num) {
-      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-    // Formata moedas conforme necessário
-    function formatCurrency(num) {
-      // Determina se devemos mostrar casas decimais
-      const hasDecimal = targetNumber % 1 !== 0;
-      const digits = hasDecimal ? 2 : 0;
-      return formatNumber(num.toFixed(digits));
-    }
-
-    // Função de animação usando requestAnimationFrame
-    function updateCounter() {
-      currentFrame++;
-
-      // Calcula o progresso atual (0 a 1)
-      const progress = currentFrame / totalFrames;
-
-      // Aplica easing para animação natural
-      const easedProgress = easeOutExpo(Math.min(progress, 1));
-
-      // Calcula o valor atual
-      let currentValue = Math.floor(easedProgress * targetNumber);
-
-      // Formata o valor adequadamente
-      let displayValue;
-      if (isCurrency) {
-        displayValue = formatCurrency(currentValue);
-      } else {
-        displayValue = formatNumber(currentValue);
-      }
-
-      // Atualiza o display
-      counterDisplay.textContent = displayValue;
-
-      // Continua a animação se não estiver completa
-      if (currentFrame < totalFrames) {
-        requestAnimationFrame(updateCounter);
-      } else {
-        // Garante que o valor final seja exatamente o alvo
-        if (isCurrency) {
-          counterDisplay.textContent = formatCurrency(targetNumber);
-        } else {
-          counterDisplay.textContent = formatNumber(targetNumber);
-        }
-
-        // Adiciona classe de conclusão para estilo adicional
-        counterElement.classList.add("counter-complete");
-
-        // Inicia animação de brilho após concluído
-        if (isCurrency) {
-          const glowAnimation = [
-            { textShadow: "0 0 0px rgba(0, 216, 255, 0)" },
-            { textShadow: "0 0 8px rgba(0, 216, 255, 0.6)" },
-            { textShadow: "0 0 2px rgba(0, 216, 255, 0.2)" },
-          ];
-
-          const glowTiming = {
-            duration: 1500,
-            iterations: 1,
-            fill: "forwards",
-            easing: "cubic-bezier(0.19, 1, 0.22, 1)",
-          };
-
-          counterDisplay.animate(glowAnimation, glowTiming);
-        }
-      }
-    }
-
-    // Inicia animação
-    requestAnimationFrame(updateCounter);
+  } else {
+    // Número regular
+    result.targetNumber = parseInt(targetString.replace(/[^\d]/g, ""), 10);
   }
+
+  // Padrão para 0 se a análise falhar
+  if (isNaN(result.targetNumber)) {
+    result.targetNumber = 0;
+  }
+
+  return result;
+}
+
+// Formatadores para diferentes tipos de valores
+const formatters = {
+  // Para formatar números com vírgulas
+  formatNumber: (num) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  },
+
+  // Formata moedas conforme necessário
+  formatCurrency: (num, hasDecimal) => {
+    const digits = hasDecimal ? 2 : 0;
+    return num
+      .toFixed(digits)
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  },
+};
+
+// Função principal de animação de contador
+function animateCounter(counterElement, isReducedMotion) {
+  // Obtém o valor alvo como string para preservar formatação
+  const targetString = counterElement.getAttribute("data-target");
+  const counterDisplay =
+    counterElement.querySelector(".counter-value") || counterElement;
+
+  // Extrai valores e formatação
+  const parsedValue = parseCounterValue(targetString);
+  const { isCurrency, prefix, suffix, targetNumber } = parsedValue;
+
+  // Detecta se o valor tem casas decimais
+  const hasDecimal = targetNumber % 1 !== 0;
+
+  // Para movimento reduzido, apenas defina o valor final
+  if (isReducedMotion) {
+    displayCounterValue(counterDisplay, targetNumber, {
+      isCurrency,
+      hasDecimal,
+      prefix,
+      suffix,
+    });
+    counterElement.classList.add("visible-counter", "counter-complete");
+    return;
+  }
+
+  // Mostrar elementos de contador inicialmente
+  counterElement.classList.add("visible-counter");
+
+  // Configuração de animação
+  const duration = 2500; // Duração da animação em ms
+  const framesPerSecond = 60;
+  const totalFrames = (duration / 1000) * framesPerSecond;
+  let currentFrame = 0;
+
+  // Função de easing para movimento natural
+  const easeOutExpo = (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
+
+  // Função de animação usando requestAnimationFrame
+  function updateCounter() {
+    currentFrame++;
+
+    // Calcula o progresso atual e aplica easing
+    const progress = currentFrame / totalFrames;
+    const easedProgress = easeOutExpo(Math.min(progress, 1));
+
+    // Calcula o valor atual
+    const currentValue = hasDecimal
+      ? easedProgress * targetNumber
+      : Math.floor(easedProgress * targetNumber);
+
+    // Formata e exibe o valor
+    displayCounterValue(counterDisplay, currentValue, {
+      isCurrency,
+      hasDecimal,
+      prefix,
+      suffix,
+    });
+
+    // Continua a animação se não estiver completa
+    if (currentFrame < totalFrames) {
+      requestAnimationFrame(updateCounter);
+    } else {
+      // Garante que o valor final seja exatamente o alvo
+      displayCounterValue(counterDisplay, targetNumber, {
+        isCurrency,
+        hasDecimal,
+        prefix,
+        suffix,
+      });
+
+      // Adiciona classe de conclusão para estilo adicional
+      counterElement.classList.add("counter-complete");
+
+      // Adiciona efeito de brilho opcional para valores monetários
+      if (isCurrency) {
+        addGlowEffect(counterDisplay);
+      }
+    }
+  }
+
+  // Inicia animação
+  requestAnimationFrame(updateCounter);
+}
+
+// Função para exibir o valor formatado do contador
+function displayCounterValue(element, value, options) {
+  const { isCurrency, hasDecimal, prefix = "", suffix = "" } = options;
+
+  if (isCurrency) {
+    element.textContent =
+      prefix + formatters.formatCurrency(value, hasDecimal) + suffix;
+  } else {
+    element.textContent = formatters.formatNumber(Math.floor(value));
+  }
+}
+
+// Adiciona efeito de brilho ao texto
+function addGlowEffect(element) {
+  const glowAnimation = [
+    { textShadow: "0 0 0px rgba(0, 216, 255, 0)" },
+    { textShadow: "0 0 8px rgba(0, 216, 255, 0.6)" },
+    { textShadow: "0 0 2px rgba(0, 216, 255, 0.2)" },
+  ];
+
+  const glowTiming = {
+    duration: 1500,
+    iterations: 1,
+    fill: "forwards",
+    easing: "cubic-bezier(0.19, 1, 0.22, 1)",
+  };
+
+  element.animate(glowAnimation, glowTiming);
 }
 
 // Adiciona efeito de brilho aos elementos glass
