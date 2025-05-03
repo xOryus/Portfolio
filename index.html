@@ -1,28 +1,30 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gabriel | Cybersecurity Specialist</title>
     <meta name="description"
-        content="Portfólio profissional de especialista em Cibersegurança, Pentester e Pesquisador de Segurança">
+        content="Professional portfolio of a Cybersecurity Specialist, Pentester and Security Researcher">
 
     <!-- Favicon -->
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
 
-    <!-- Fontes -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;800&family=Roboto:wght@300;400;700&display=swap"
         rel="stylesheet">
 
-    <!-- Font Awesome para ícones -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Font Awesome for icons - optimized loading -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- CSS Principal -->
+    <!-- Main CSS -->
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/animations.css">
@@ -30,13 +32,16 @@
 </head>
 
 <body>
-    <!-- Efeito de partículas de fundo -->
-    <div id="particles-bg"></div>
+    <!-- Skip navigation for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Overlay para efeito Matrix -->
-    <div class="matrix-overlay"></div>
+    <!-- Background particles effect -->
+    <div id="particles-bg" aria-hidden="true"></div>
 
-    <!-- Header e navegação (movido para fora do wrapper) -->
+    <!-- Matrix effect overlay -->
+    <div class="matrix-overlay" aria-hidden="true"></div>
+
+    <!-- Header and navigation (outside the wrapper) -->
     <header>
         <div class="header-content">
             <div class="logo">
@@ -45,11 +50,11 @@
             <nav>
                 <ul>
                     <li><a href="#home" class="nav-link">Home</a></li>
-                    <li><a href="#experience" class="nav-link">Experiência</a></li>
-                    <li><a href="#education" class="nav-link">Educação</a></li>
-                    <li><a href="#achievements" class="nav-link">Reconhecimentos</a></li>
-                    <li><a href="#projects" class="nav-link">Projetos</a></li>
-                    <li><a href="#contact" class="nav-link">Contato</a></li>
+                    <li><a href="#experience" class="nav-link">Experience</a></li>
+                    <li><a href="#education" class="nav-link">Education</a></li>
+                    <li><a href="#achievements" class="nav-link">Achievements</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
                 <div class="menu-toggle">
                     <div class="bar"></div>
@@ -60,11 +65,11 @@
         </div>
     </header>
 
-    <!-- Adicionando a classe wrapper para aplicar o zoom apenas ao conteúdo principal -->
-    <div class="wrapper">
-        <!-- Container principal -->
+    <!-- Wrapper class to apply zoom only to main content -->
+    <div class="wrapper" id="main-content">
+        <!-- Main container -->
         <div class="container">
-            <!-- Seção Home -->
+            <!-- Home Section -->
             <section id="home" class="section">
                 <div class="glitch-container">
                     <h1 class="glitch" data-text="GABRIEL">GABRIEL</h1>
@@ -85,14 +90,14 @@
                     </div>
 
                     <div class="dashboard-grid">
-                        <!-- Perfil e Informações -->
+                        <!-- Profile Information -->
                         <div class="dashboard-card profile">
                             <div class="card-header">
                                 <i class="fas fa-user-shield"></i> PROFILE
                             </div>
                             <div class="card-content">
                                 <div class="profile-title">Cybersecurity Specialist</div>
-                                <div class="profile-subtitle">Pesquisador de Segurança | Pentester </div>
+                                <div class="profile-subtitle">Security Researcher | Pentester</div>
                                 <div class="tag-container">
                                     <span class="tag">Web Security</span>
                                     <span class="tag">API Testing</span>
@@ -102,14 +107,14 @@
                             </div>
                         </div>
 
-                        <!-- Missão -->
+                        <!-- Mission -->
                         <div class="dashboard-card mission">
                             <div class="card-header">
                                 <i class="fas fa-flag"></i> MISSION
                             </div>
                             <div class="card-content">
-                                <div class="mission-text">"Atuar na identificação e validação de vulnerabilidades, com
-                                    responsabilidade e foco em resultados reais para o negócio."</div>
+                                <div class="mission-text">"To identify and validate vulnerabilities with responsibility
+                                    and focus on delivering real business impact."</div>
                             </div>
                         </div>
 
@@ -165,7 +170,7 @@
                                 <ul class="achievement-list">
                                     <li>
                                         <i class="fas fa-check-circle"></i>
-                                        <span>+4 CVEs reportados</span>
+                                        <span>+4 CVEs reported</span>
                                     </li>
                                     <li>
                                         <i class="fas fa-check-circle"></i>
@@ -183,7 +188,7 @@
                     <div class="dashboard-footer">
                         <div class="activity-indicator">
                             <span class="pulse"></span>
-                            <span class="activity-text">Monitoramento ativo</span>
+                            <span class="activity-text">Active monitoring</span>
                         </div>
                         <div class="system-stats">
                             <span class="stat">Uptime: 99.7%</span>
@@ -198,57 +203,57 @@
                 </div>
             </section>
 
-            <!-- Seção Experiência -->
+            <!-- Experience Section -->
             <section id="experience" class="section">
-                <h2 class="section-title">Experiência<span class="accent">_</span></h2>
+                <h2 class="section-title">Experience<span class="accent">_</span></h2>
 
                 <div class="timeline">
                     <div class="timeline-item active" data-year="2024">
                         <div class="timeline-content">
-                            <h3>Pesquisador de Segurança</h3>
-                            <span class="period">Atual</span>
+                            <h3>Security Researcher</h3>
+                            <span class="period">Current</span>
                             <ul class="skills-list">
-                                <li>Testes de segurança em aplicações web e móveis</li>
-                                <li>Participação em programas de bug bounty</li>
+                                <li>Security testing for web and mobile applications</li>
+                                <li>Participation in bug bounty programs</li>
                                 <li>Hall of Fame (Ford/Itaú)</li>
-                                <li>Acesso a +50 programas privados</li>
-                                <li>Descoberta e relatório de vulnerabilidades críticas</li>
+                                <li>Access to +50 private programs</li>
+                                <li>Discovery and reporting of critical vulnerabilities</li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="timeline-item" data-year="2023">
                         <div class="timeline-content">
-                            <h3>Pentester Privado</h3>
+                            <h3>Private Pentester</h3>
                             <span class="period">Freelance</span>
                             <ul class="skills-list">
-                                <li>Identificação e exploração de XSS, IDOR, CSRF, RCE</li>
-                                <li>Desenvolvimento de automações com scripts</li>
-                                <li>Criação de exploits customizados</li>
-                                <li>Contribuição para CVE's</li>
-                                <li>OWASP TOP 10 - testes e mitigação</li>
+                                <li>Identification and exploitation of XSS, IDOR, CSRF, RCE</li>
+                                <li>Development of automation scripts</li>
+                                <li>Creation of custom exploits</li>
+                                <li>Contribution to CVEs</li>
+                                <li>OWASP TOP 10 - testing and mitigation</li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="timeline-item" data-year="2022">
                         <div class="timeline-content">
-                            <h3>Suporte Técnico em TI</h3>
+                            <h3>IT Technical Support</h3>
                             <span class="period">Freelance</span>
                             <ul class="skills-list">
-                                <li>Gestão de tickets em Movidesk, Zendesk, Live Agent</li>
-                                <li>Implementação de metodologias ITIL/ITSM</li>
-                                <li>Redução de 37% no tempo médio de atendimento</li>
-                                <li>Automação de processos de suporte</li>
+                                <li>Ticket management in Movidesk, Zendesk, Live Agent</li>
+                                <li>Implementation of ITIL/ITSM methodologies</li>
+                                <li>37% reduction in average response time</li>
+                                <li>Support process automation</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Seção Educação e Certificações -->
+            <!-- Education and Certifications Section -->
             <section id="education" class="section">
-                <h2 class="section-title">Educação & Certificações<span class="accent">_</span></h2>
+                <h2 class="section-title">Education & Certifications<span class="accent">_</span></h2>
 
                 <div class="certifications-grid">
                     <div class="certification-card">
@@ -256,7 +261,7 @@
                             <i class="fab fa-google"></i>
                         </div>
                         <h3>Google Cybersecurity</h3>
-                        <p>Certificação profissional em práticas modernas de cibersegurança</p>
+                        <p>Professional certification in modern cybersecurity practices</p>
                     </div>
 
                     <div class="certification-card">
@@ -264,15 +269,15 @@
                             <i class="fas fa-university"></i>
                         </div>
                         <h3>CC50 Harvard</h3>
-                        <p>Introdução à Ciência da Computação</p>
+                        <p>Introduction to Computer Science</p>
                     </div>
 
                     <div class="certification-card">
                         <div class="certification-icon">
                             <i class="fas fa-shield-alt"></i>
                         </div>
-                        <h3>Certificação SYCP</h3>
-                        <p>Solyd - Pentest e segurança ofensiva</p>
+                        <h3>SYCP Certification</h3>
+                        <p>Solyd - Pentest and offensive security</p>
                     </div>
 
                     <div class="certification-card">
@@ -280,22 +285,22 @@
                             <i class="fab fa-github"></i>
                         </div>
                         <h3>GitHub Foundations</h3>
-                        <p>Versionamento e colaboração em projetos</p>
+                        <p>Versioning and collaboration in projects</p>
                     </div>
 
                     <div class="certification-card wide-card">
                         <div class="certification-icon">
                             <i class="fas fa-graduation-cap"></i>
                         </div>
-                        <h3>Graduação em Cybersecurity</h3>
-                        <p>Em andamento</p>
+                        <h3>Cybersecurity Degree</h3>
+                        <p>In progress</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Seção Reconhecimentos -->
+            <!-- Achievements Section -->
             <section id="achievements" class="section">
-                <h2 class="section-title">Reconhecimentos<span class="accent">_</span></h2>
+                <h2 class="section-title">Achievements<span class="accent">_</span></h2>
 
                 <div class="achievements-container">
                     <div class="hall-of-fame">
@@ -320,15 +325,15 @@
                                 <span class="counter-value">0</span>
                                 <span class="counter-suffix">+</span>
                             </div>
-                            <span class="counter-label">Em recompensas e Badges</span>
+                            <span class="counter-label">In rewards and badges</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Seção Projetos -->
+            <!-- Projects Section -->
             <section id="projects" class="section">
-                <h2 class="section-title">Projetos & Scripts<span class="accent">_</span></h2>
+                <h2 class="section-title">Projects & Scripts<span class="accent">_</span></h2>
 
                 <div class="projects-grid">
                     <div class="project-card">
@@ -337,8 +342,8 @@
                             <h3>Web Vulnerability Scanner</h3>
                         </div>
                         <div class="project-body">
-                            <p>Ferramenta automatizada para detecção de vulnerabilidades web comuns, incluindo SQL
-                                Injection, XSS e CSRF.</p>
+                            <p>Automated tool for detecting common web vulnerabilities, including SQL Injection, XSS,
+                                and CSRF.</p>
                             <div class="tech-stack">
                                 <span class="tech-badge">Python</span>
                                 <span class="tech-badge">Requests</span>
@@ -353,8 +358,8 @@
                             <h3>Network Traffic Analyzer</h3>
                         </div>
                         <div class="project-body">
-                            <p>Script para análise de tráfego de rede, detecção de anomalias e possíveis invasões com
-                                alertas em tempo real.</p>
+                            <p>Script for network traffic analysis, anomaly detection, and possible intrusion alerts in
+                                real-time.</p>
                             <div class="tech-stack">
                                 <span class="tech-badge">Python</span>
                                 <span class="tech-badge">Scapy</span>
@@ -366,12 +371,11 @@
                     <div class="project-card">
                         <div class="project-header">
                             <i class="fas fa-terminal"></i>
-                            <h3>Proxmark3</h3>
+                            <h3>Proxmark3 to NFC Converter</h3>
                         </div>
                         <div class="project-body">
-                            <p>O Proxmark3 to NFC Converter é um aplicativo Python que transforma os despejos JSON do
-                                Proxmark3 em arquivos NFC compatíveis com o Flipper Zero, com uma GUI simples para uma
-                                conversão perfeita.</p>
+                            <p>A Python application that transforms Proxmark3 JSON dumps into NFC files compatible with
+                                Flipper Zero, featuring a simple GUI for seamless conversion.</p>
                             <div class="tech-stack">
                                 <span class="tech-badge">Bash</span>
                                 <span class="tech-badge">Python</span>
@@ -385,8 +389,7 @@
                             <h3>API Security Tester</h3>
                         </div>
                         <div class="project-body">
-                            <p>Suite de testes automatizados para validação de segurança em APIs REST, GraphQL e gRPC.
-                            </p>
+                            <p>Suite of automated tests for security validation in REST, GraphQL, and gRPC APIs.</p>
                             <div class="tech-stack">
                                 <span class="tech-badge">Node.js</span>
                                 <span class="tech-badge">Express</span>
@@ -397,33 +400,36 @@
                 </div>
             </section>
 
-            <!-- Seção Contato -->
+            <!-- Contact Section -->
             <section id="contact" class="section">
-                <h2 class="section-title">Contato<span class="accent">_</span></h2>
+                <h2 class="section-title">Contact<span class="accent">_</span></h2>
 
                 <div class="contact-container">
                     <div class="contact-form-container">
                         <form id="contact-form" class="contact-form">
                             <div class="input-group">
-                                <input type="text" id="name" name="name" required>
-                                <label for="name">Nome</label>
+                                <input type="text" id="name" name="name" required pattern="[A-Za-z0-9\s]+" minlength="2"
+                                    maxlength="50">
+                                <label for="name">Name</label>
                                 <div class="input-highlight"></div>
                             </div>
 
                             <div class="input-group">
-                                <input type="email" id="email" name="email" required>
+                                <input type="email" id="email" name="email" required
+                                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
                                 <label for="email">Email</label>
                                 <div class="input-highlight"></div>
                             </div>
 
                             <div class="input-group">
-                                <textarea id="message" name="message" required></textarea>
-                                <label for="message">Mensagem</label>
+                                <textarea id="message" name="message" required minlength="10"
+                                    maxlength="500"></textarea>
+                                <label for="message">Message</label>
                                 <div class="input-highlight"></div>
                             </div>
 
                             <button type="submit" class="submit-btn">
-                                <span class="btn-text">ENVIAR</span>
+                                <span class="btn-text">SEND</span>
                                 <span class="btn-icon"><i class="fas fa-paper-plane"></i></span>
                             </button>
                         </form>
@@ -434,12 +440,12 @@
                             <i class="fab fa-github"></i>
                             <span>GitHub</span>
                         </a>
-                        <a href="https://br.linkedin.com/in/gabrielhrqr" target="_blank" class="social-link">
+                        <a href="https://linkedin.com/in/gabrielhrqr" target="_blank" class="social-link">
                             <i class="fab fa-linkedin"></i>
                             <span>LinkedIn</span>
                         </a>
                         <a href="mailto:gabrielhenrique310@hotmail.com" class="social-link">
-                            <i class="fas fa-cube"></i>
+                            <i class="fas fa-envelope"></i>
                             <span>Email</span>
                         </a>
                     </div>
@@ -448,25 +454,25 @@
         </div>
     </div>
 
-    <!-- Footer (movido para fora do wrapper) -->
+    <!-- Footer (outside the wrapper) -->
     <footer>
         <div class="footer-content">
             <p>&copy; 2025 Gabriel - Cybersecurity Specialist</p>
             <div class="footer-links">
                 <a href="#home">Home</a>
-                <a href="#experience">Experiência</a>
-                <a href="#education">Educação</a>
-                <a href="#achievements">Reconhecimentos</a>
-                <a href="#projects">Projetos</a>
-                <a href="#contact">Contato</a>
+                <a href="#experience">Experience</a>
+                <a href="#education">Education</a>
+                <a href="#achievements">Achievements</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
             </div>
         </div>
     </footer>
 
     <!-- JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/animations.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/animations.js" defer></script>
 </body>
 
 </html>

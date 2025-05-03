@@ -1,597 +1,531 @@
 /**
- * ANIMATIONS.JS - EFEITOS VISUAIS AVANÇADOS
- * Animações específicas para o tema de cibersegurança - VERSÃO OTIMIZADA
+ * Animações avançadas para portfólio
+ * Efeitos visuais interativos com temática de cibersegurança
  */
 
-// Detector de dispositivo para ajustar animações
-const deviceDetection = {
-  isMobile: window.innerWidth < 768,
-  isTablet: window.innerWidth >= 768 && window.innerWidth < 1024,
-  isDesktop: window.innerWidth >= 1024,
-  // Detecção de dispositivos de baixa performance
-  isLowPower: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
-  // Preferência por redução de movimento (acessibilidade)
-  prefersReducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-
-  // Cache para animações ativas para evitar duplicação
-  activeAnimations: {
-    matrix: false,
-    circuit: [],
-  },
-};
-
-// Função para controle de throttling - limita a frequência de chamadas de funções
-function throttle(callback, delay) {
-  let lastCall = 0;
-  return function (...args) {
-    const now = Date.now();
-    if (now - lastCall >= delay) {
-      lastCall = now;
-      callback(...args);
-    }
-  };
-}
-
-// Ajusta configurações baseado no dispositivo - com throttling para melhor performance
-window.addEventListener("resize", throttle(() => {
-  deviceDetection.isMobile = window.innerWidth < 768;
-  deviceDetection.isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
-  deviceDetection.isDesktop = window.innerWidth >= 1024;
-}, 250)); // Throttle a 250ms para reduzir carga durante redimensionamento
-
+// Inicialização de todas as animações
 document.addEventListener("DOMContentLoaded", () => {
-  // Verifica preferência por animações reduzidas para acessibilidade
-  if (deviceDetection.prefersReducedMotion) {
-    console.info("Modo de animações reduzidas ativado para acessibilidade");
-    document.body.classList.add("reduced-motion");
-    return; // Evita inicializar animações pesadas
+  // Detecta preferências de redução de movimento
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  // Inicializa animações apenas se o usuário não preferir movimento reduzido
+  if (!prefersReducedMotion) {
+    initMatrixRain();
+    initGlitchEffect();
+    initCounterAnimations();
+    initGlassShimmer();
+    initGlassParticles();
+    initTextTypingEffect();
+  } else {
+    // Ainda inicializa contadores com animação mínima
+    initCounterAnimations(true);
   }
-
-  // Inicializa todos os efeitos visuais apenas uma vez após um leve atraso
-  // Usa requestAnimationFrame para melhor integração com ciclo de renderização
-  requestAnimationFrame(() => {
-    setTimeout(() => {
-      if (!deviceDetection.activeAnimations.matrix) {
-        // Reduz carga de animação em dispositivos de baixa potência
-        if (!deviceDetection.isLowPower) {
-          initializeMatrixEffect();
-          createDigitalGrid();
-        } else {
-          console.info("Limitando efeitos visuais em dispositivo de baixa potência");
-        }
-
-        // Inicializa efeitos mais leves em todos os dispositivos
-        initializeGlitchEffect();
-        initializeTypewriterEffect();
-      }
-    }, 100);
-  });
 });
 
-// Efeito de Chuva Digital (Matrix) no background - VERSÃO OTIMIZADA
-function initializeMatrixEffect() {
-  // Verifica se já existe um canvas para o efeito
-  if (document.querySelector(".matrix-effect-bg")) return;
-  if (deviceDetection.activeAnimations.matrix) return;
+// Inicializa animação de chuva digital estilo Matrix
+function initMatrixRain() {
+  // Verifica se o elemento canvas já existe
+  if (document.querySelector(".digital-rain-canvas")) return;
 
-  deviceDetection.activeAnimations.matrix = true;
+  // Cria o elemento canvas para a chuva digital
+  const canvas = document.createElement("canvas");
+  canvas.className = "digital-rain-canvas";
+  document.body.appendChild(canvas);
 
-  // Cria o canvas para o efeito com configurações melhoradas para performance
-  const matrixCanvas = document.createElement("canvas");
-  matrixCanvas.className = "matrix-effect-bg";
-  matrixCanvas.style.position = "fixed";
-  matrixCanvas.style.top = "0";
-  matrixCanvas.style.left = "0";
-  matrixCanvas.style.width = "100%";
-  matrixCanvas.style.height = "100%";
-  matrixCanvas.style.zIndex = "-3";
-  // Reduz opacidade em dispositivos móveis para melhorar performance
-  matrixCanvas.style.opacity = deviceDetection.isMobile ? "0.03" : "0.05";
-  matrixCanvas.style.pointerEvents = "none"; // Desabilita completamente interações
-  // Adiciona propriedade transform para melhor performance com GPU
-  matrixCanvas.style.transform = "translateZ(0)";
-  matrixCanvas.style.willChange = "transform"; // Indica ao navegador para otimizar animações
-  document.body.appendChild(matrixCanvas);
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 
-  const ctx = matrixCanvas.getContext("2d", { alpha: true, desynchronized: true }); // Melhoria de performance
+  // Detecta se é dispositivo móvel para ajustar a densidade
+  const isMobile =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
 
-  // Dimensões do canvas com melhor ajuste para dispositivos
-  const updateCanvasDimensions = () => {
-    // Em dispositivos móveis, reduz a resolução para melhor performance
-    const scaleFactor = deviceDetection.isMobile ? 0.75 : 1;
-    matrixCanvas.width = window.innerWidth * scaleFactor;
-    matrixCanvas.height = window.innerHeight * scaleFactor;
-  };
+  // Símbolos utilizados na animação (caracteres cibernéticos/matriz)
+  const symbols =
+    "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(
+      ""
+    );
 
-  updateCanvasDimensions();
+  // Configurações da matriz
+  const fontSize = isMobile ? 10 : 14;
+  const columns = Math.floor(canvas.width / fontSize) + 1;
 
-  // Caracteres para o efeito Matrix
-  const matrix = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
-  const characters = matrix.split("");
+  // Array para controlar a posição Y de cada coluna
+  const drops = [];
+  for (let i = 0; i < columns; i++) {
+    drops[i] = Math.random() * -canvas.height;
+  }
 
-  // Ajusta densidade baseada no dispositivo - OTIMIZADO
-  const fontSize = deviceDetection.isMobile ? 10 : deviceDetection.isTablet ? 11 : 12;
-  const density = deviceDetection.isDesktop ? 1.8 : deviceDetection.isTablet ? 1.5 : 1; // Reduz densidade em desktops
-  const columns = Math.floor(matrixCanvas.width / fontSize / density);
-
-  // Array de posições Y para cada coluna
-  const drops = Array(columns).fill(1);
-
-  // Cores otimizadas para melhor renderização
-  const baseColor = deviceDetection.isMobile ? "rgba(0, 255, 0, 0.65)" : "rgba(0, 255, 0, 0.8)";
-  const fadeColor = "rgba(0, 0, 0, 0.05)";
-
-  // Taxa de atualização baseada no dispositivo
-  const frameRate = deviceDetection.isDesktop ? 60 : deviceDetection.isTablet ? 45 : 30; // Taxa adaptada
-  const frameDelay = 1000 / frameRate;
   let lastTime = 0;
+  const fps = isMobile ? 15 : 30; // Limita FPS para melhor desempenho em mobile
+  const interval = 1000 / fps;
 
-  // Função de desenho para o efeito Matrix com controle de framerate aprimorado
-  function drawMatrixRain(timestamp) {
-    // Controle de framerate mais preciso
-    if (timestamp - lastTime < frameDelay) {
-      requestAnimationFrame(drawMatrixRain);
+  // Função de desenho da chuva digital
+  function drawMatrix(timestamp) {
+    // Controle de FPS
+    if (timestamp - lastTime < interval) {
+      requestAnimationFrame(drawMatrix);
+      return;
+    }
+    lastTime = timestamp;
+
+    // Aplica efeito de desvanecimento para trilha
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Define estilo para caracteres
+    ctx.fillStyle = "#0fa";
+    ctx.font = fontSize + "px monospace";
+
+    // Desenha caracteres
+    for (let i = 0; i < drops.length; i++) {
+      // Escolhe um caractere aleatório para desenhar
+      const text = symbols[Math.floor(Math.random() * symbols.length)];
+
+      // Desenha o caractere
+      ctx.fillText(text, i * fontSize, drops[i] * 1);
+
+      // Reseta quando atinge o fundo com chance aleatória
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+
+      // Move as gotas para baixo
+      drops[i]++;
+    }
+
+    // Continua a animação
+    requestAnimationFrame(drawMatrix);
+  }
+
+  // Inicia a animação com requestAnimationFrame
+  requestAnimationFrame(drawMatrix);
+
+  // Redimensiona o canvas quando a janela é redimensionada
+  window.addEventListener("resize", () => {
+    // Limita a frequência de redimensionamento
+    clearTimeout(window.resizeTimeout);
+    window.resizeTimeout = setTimeout(() => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      // Recalcula colunas
+      const newColumns = Math.floor(canvas.width / fontSize) + 1;
+      // Redefine gotas para novas dimensões
+      while (drops.length < newColumns) {
+        drops.push(Math.random() * -canvas.height);
+      }
+      // Trunca o array se necessário
+      drops.length = newColumns;
+    }, 200);
+  });
+}
+
+// Inicializa efeito Glitch para elementos com a classe .glitch
+function initGlitchEffect() {
+  const glitchElements = document.querySelectorAll(".glitch");
+
+  glitchElements.forEach((element) => {
+    // Armazena o texto original como atributo data-text para uso pelo pseudo-elemento
+    if (!element.hasAttribute("data-text")) {
+      element.setAttribute("data-text", element.textContent);
+    }
+
+    // Adiciona interatividade ao passar o mouse
+    element.addEventListener("mouseenter", () => {
+      element.classList.add("active-glitch");
+    });
+
+    element.addEventListener("mouseleave", () => {
+      element.classList.remove("active-glitch");
+    });
+
+    // Efeito glitch aleatório periódico
+    setInterval(() => {
+      if (Math.random() > 0.95) {
+        element.classList.add("active-glitch");
+        setTimeout(() => {
+          element.classList.remove("active-glitch");
+        }, 500 + Math.random() * 1000);
+      }
+    }, 3000);
+  });
+}
+
+// Inicializa animações de contador para estatísticas
+function initCounterAnimations(reducedMotion = false) {
+  const counters = document.querySelectorAll(".counter:not(.counted)");
+
+  counters.forEach((counter) => {
+    // Marca o contador para evitar inicialização dupla
+    counter.classList.add("counted");
+
+    // Usa IntersectionObserver para iniciar apenas quando visível
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCounter(counter, reducedMotion);
+            observer.unobserve(counter);
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+
+    observer.observe(counter);
+  });
+
+  function animateCounter(counterElement, isReducedMotion) {
+    // Obtém o valor alvo como string para preservar formatação
+    const targetString = counterElement.getAttribute("data-target");
+    const counterDisplay =
+      counterElement.querySelector(".counter-value") || counterElement;
+
+    // Detecta se é um contador de moeda
+    const isCurrency =
+      targetString.includes("$") ||
+      targetString.includes("€") ||
+      targetString.includes("£") ||
+      targetString.includes("¥");
+
+    // Processa corretamente o valor com formatação
+    let prefix = "",
+      suffix = "",
+      targetNumber;
+
+    if (isCurrency) {
+      // Extrai símbolo de moeda/prefixo e valor numérico
+      const currencyMatch = targetString.match(/^([^\d]*)(\d[\d,.]*)([^\d]*)$/);
+      if (currencyMatch) {
+        prefix = currencyMatch[1]; // Símbolo de moeda ou prefixo
+        const numericPart = currencyMatch[2].replace(/,/g, ""); // Remove vírgulas
+        targetNumber = parseFloat(numericPart);
+        suffix = currencyMatch[3]; // Qualquer sufixo
+      } else {
+        // Fallback se a correspondência falhar
+        targetNumber = parseFloat(targetString.replace(/[^\d.]/g, ""));
+      }
+    } else {
+      // Número regular
+      targetNumber = parseInt(targetString.replace(/[^\d]/g, ""), 10);
+    }
+
+    // Padrão para 0 se a análise falhar
+    if (isNaN(targetNumber)) {
+      targetNumber = 0;
+    }
+
+    // Para movimento reduzido, apenas defina o valor final
+    if (isReducedMotion) {
+      if (isCurrency) {
+        counterDisplay.textContent =
+          prefix + formatNumber(targetNumber.toFixed(2)) + suffix;
+      } else {
+        counterDisplay.textContent = formatNumber(targetNumber);
+      }
+      counterElement.classList.add("visible-counter", "counter-complete");
       return;
     }
 
-    lastTime = timestamp;
+    // Mostrar elementos de contador inicialmente
+    counterElement.classList.add("visible-counter");
 
-    // Cria um efeito de rastro com fundo semi-transparente
-    ctx.fillStyle = fadeColor;
-    ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+    // Configuração de animação
+    const duration = 2500; // Duração da animação em ms
+    const framesPerSecond = 60;
+    const totalFrames = (duration / 1000) * framesPerSecond;
+    let currentFrame = 0;
 
-    // Define cor e fonte para os caracteres
-    ctx.fillStyle = baseColor;
-    ctx.font = `${fontSize}px "JetBrains Mono", monospace`;
+    // Função de easing personalizada para movimento natural
+    const easeOutExpo = (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
 
-    // Loop para desenhar os caracteres - OTIMIZADO
-    for (let i = 0; i < drops.length; i++) {
-      // Seleciona um caractere aleatório
-      const text = characters[Math.floor(Math.random() * characters.length)];
-
-      // Desenha o caractere na posição
-      ctx.fillText(text, i * fontSize * density, drops[i] * fontSize);
-
-      // Move a posição para baixo (com velocidade ajustada por dispositivo)
-      if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
-        drops[i] = 0;
-      }
-      drops[i] += deviceDetection.isMobile ? 0.5 : 1; // Movimentação mais suave em mobile
+    // Para formatar números com vírgulas
+    function formatNumber(num) {
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
-    // Usar requestAnimationFrame para sincronizar com a taxa de atualização do navegador
-    requestAnimationFrame(drawMatrixRain);
+    // Formata moedas conforme necessário
+    function formatCurrency(num) {
+      // Determina se devemos mostrar casas decimais
+      const hasDecimal = targetNumber % 1 !== 0;
+      const digits = hasDecimal ? 2 : 0;
+      return formatNumber(num.toFixed(digits));
+    }
+
+    // Função de animação usando requestAnimationFrame
+    function updateCounter() {
+      currentFrame++;
+
+      // Calcula o progresso atual (0 a 1)
+      const progress = currentFrame / totalFrames;
+
+      // Aplica easing para animação natural
+      const easedProgress = easeOutExpo(Math.min(progress, 1));
+
+      // Calcula o valor atual
+      let currentValue = Math.floor(easedProgress * targetNumber);
+
+      // Formata o valor adequadamente
+      let displayValue;
+      if (isCurrency) {
+        displayValue = formatCurrency(currentValue);
+      } else {
+        displayValue = formatNumber(currentValue);
+      }
+
+      // Atualiza o display
+      counterDisplay.textContent = displayValue;
+
+      // Continua a animação se não estiver completa
+      if (currentFrame < totalFrames) {
+        requestAnimationFrame(updateCounter);
+      } else {
+        // Garante que o valor final seja exatamente o alvo
+        if (isCurrency) {
+          counterDisplay.textContent = formatCurrency(targetNumber);
+        } else {
+          counterDisplay.textContent = formatNumber(targetNumber);
+        }
+
+        // Adiciona classe de conclusão para estilo adicional
+        counterElement.classList.add("counter-complete");
+
+        // Inicia animação de brilho após concluído
+        if (isCurrency) {
+          const glowAnimation = [
+            { textShadow: "0 0 0px rgba(0, 216, 255, 0)" },
+            { textShadow: "0 0 8px rgba(0, 216, 255, 0.6)" },
+            { textShadow: "0 0 2px rgba(0, 216, 255, 0.2)" },
+          ];
+
+          const glowTiming = {
+            duration: 1500,
+            iterations: 1,
+            fill: "forwards",
+            easing: "cubic-bezier(0.19, 1, 0.22, 1)",
+          };
+
+          counterDisplay.animate(glowAnimation, glowTiming);
+        }
+      }
+    }
+
+    // Inicia animação
+    requestAnimationFrame(updateCounter);
   }
-
-  // Inicia a animação Matrix com requestAnimationFrame 
-  requestAnimationFrame(drawMatrixRain);
-
-  // Ajusta o tamanho quando a janela é redimensionada (com throttle)
-  window.addEventListener("resize", throttle(() => {
-    updateCanvasDimensions();
-  }, 250));
 }
 
-// Aplica efeito glitch animado ao texto - VERSÃO OTIMIZADA
-function initializeGlitchEffect() {
-  const glitchTexts = document.querySelectorAll(".glitch");
+// Adiciona efeito de brilho aos elementos glass
+function initGlassShimmer() {
+  const glassElements = document.querySelectorAll(".glass-effect, .glass-card");
 
-  if (!glitchTexts.length) return;
+  glassElements.forEach((element) => {
+    // Verifica se o elemento já tem o efeito
+    if (element.querySelector(".glass-shimmer-effect")) return;
 
-  glitchTexts.forEach((text) => {
-    // Garante que o atributo data-text está definido
-    if (!text.getAttribute("data-text")) {
-      text.setAttribute("data-text", text.textContent);
-    }
+    // Cria o elemento de efeito shimmer
+    const shimmerEffect = document.createElement("div");
+    shimmerEffect.className = "glass-shimmer-effect";
+    element.appendChild(shimmerEffect);
 
-    // Reduz frequência em desktop e dispositivos de baixa potência
-    const interval = deviceDetection.isLowPower ? 5000 :
-      deviceDetection.isDesktop ? 4500 : 3000;
+    // Adiciona o efeito de grade para elementos de vidro
+    const gridPattern = document.createElement("div");
+    gridPattern.className = "glass-grid-pattern";
+    element.appendChild(gridPattern);
 
-    // Adiciona efeito de glitch com controle de performance
-    let glitchInterval;
+    // Adiciona shimmer animation com web animations API
+    const shimmerAnimation = [
+      { transform: "translateX(-100%) skewX(-15deg)", opacity: 0 },
+      {
+        transform: "translateX(100%) skewX(-15deg)",
+        opacity: 0.3,
+        offset: 0.5,
+      },
+      { transform: "translateX(200%) skewX(-15deg)", opacity: 0 },
+    ];
 
-    const startGlitchInterval = () => {
-      glitchInterval = setInterval(() => {
-        // Chance aleatória de aplicar o efeito, reduzida em dispositivos de baixa potência
-        const threshold = deviceDetection.isLowPower ? 0.95 : 0.9;
-        if (Math.random() > threshold) {
-          text.classList.add("active-glitch");
-
-          // Remove a classe após um curto período com transição suavizada
-          setTimeout(() => {
-            text.classList.remove("active-glitch");
-          }, deviceDetection.isLowPower ? 100 : 200);
-        }
-      }, interval);
+    const shimmerTiming = {
+      duration: 4000 + Math.random() * 4000, // Varia entre 4-8s
+      iterations: Infinity,
+      easing: "cubic-bezier(0.215, 0.61, 0.355, 1)",
     };
 
-    // Otimização: pausa o glitch quando a página não está visível
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden && glitchInterval) {
-        clearInterval(glitchInterval);
-      } else if (!document.hidden && !glitchInterval) {
-        startGlitchInterval();
-      }
-    });
-
-    // Inicia o intervalo
-    startGlitchInterval();
-
-    // Ativa o glitch no hover para interatividade adicional
-    text.addEventListener("mouseenter", () => {
-      if (!deviceDetection.isLowPower) {
-        text.classList.add("active-glitch");
-        setTimeout(() => text.classList.remove("active-glitch"), 300);
-      }
-    });
+    // Inicia com atraso aleatório para evitar sincronização
+    setTimeout(() => {
+      shimmerEffect.animate(shimmerAnimation, shimmerTiming);
+    }, Math.random() * 2000);
   });
 }
 
-// Efeito de digitação para textos com classe typewriter - VERSÃO OTIMIZADA
-function initializeTypewriterEffect() {
-  const typeElements = document.querySelectorAll(".typing");
+// Adiciona partículas aos elementos glass para efeito visual
+function initGlassParticles() {
+  const glassElements = document.querySelectorAll(".glass-effect, .glass-card");
 
-  typeElements.forEach((element) => {
-    const text = element.textContent;
-    // Ajusta velocidade baseada no dispositivo com mais suavidade
-    const baseDuration = parseInt(element.dataset.speed) || 100;
-    const duration = deviceDetection.isDesktop
-      ? baseDuration * 0.8
-      : deviceDetection.isTablet
-        ? baseDuration * 0.9
-        : baseDuration;
-
-    // Limpa o conteúdo original
-    element.textContent = "";
-
-    // Adiciona espaço pré-alocado para evitar reflow
-    element.style.minHeight = `${element.offsetHeight || 20}px`;
-
-    // Função para digitar caractere por caractere com melhor performance
-    function typeCharacter(index) {
-      // Usa requestAnimationFrame para melhor sincronização com ciclo de renderização
-      if (index < text.length) {
-        requestAnimationFrame(() => {
-          element.textContent += text.charAt(index);
-          setTimeout(() => typeCharacter(index + 1), duration);
-        });
-      } else {
-        // Adiciona cursor piscante no final
-        element.classList.add("typing-done");
-      }
+  glassElements.forEach((element) => {
+    // Não adiciona partículas em dispositivos móveis para melhorar o desempenho
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    ) {
+      return;
     }
 
-    // Inicia o efeito de digitação quando o elemento estiver visível
-    // Usa IntersectionObserver para melhor performance
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // Pequeno atraso para melhor efeito visual
-          setTimeout(() => {
-            typeCharacter(0);
-          }, 300);
-          observer.unobserve(element);
-        }
-      });
-    }, {
-      threshold: 0.2,
-      rootMargin: "0px 0px -50px 0px"
-    });
+    // Número de partículas baseado no tamanho do elemento
+    const elementArea = element.offsetWidth * element.offsetHeight;
+    const particleCount = Math.min(Math.floor(elementArea / 10000), 8);
 
-    observer.observe(element);
-  });
-}
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement("div");
+      particle.className = "glass-particle";
 
-// Cria grid digital animado em elementos com classe digital-grid - VERSÃO OTIMIZADA
-function createDigitalGrid() {
-  const gridElements = document.querySelectorAll(".digital-grid-container");
+      // Posição aleatória dentro do elemento
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.top = `${Math.random() * 100}%`;
 
-  gridElements.forEach((container) => {
-    // Verifica se já existe uma grid para evitar duplicação
-    if (container.querySelector(".digital-grid")) return;
+      // Tamanho variável
+      const size = 2 + Math.random() * 3;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
 
-    const grid = document.createElement("div");
-    grid.className = "digital-grid";
-    grid.style.pointerEvents = "none"; // Desabilita interações
-    // Ativa aceleração de hardware
-    grid.style.transform = "translateZ(0)";
-    grid.style.willChange = "opacity"; // Melhora performance de animações de opacidade
-    container.appendChild(grid);
+      // Opacidade variável
+      particle.style.opacity = 0.1 + Math.random() * 0.4;
 
-    // Reduz número de pontos com base na performance do dispositivo
-    const numDots = deviceDetection.isLowPower ? 15 :
-      deviceDetection.isDesktop ? 30 :
-        deviceDetection.isTablet ? 40 : 25;
+      element.appendChild(particle);
 
-    // Adiciona pontos piscantes aleatórios com melhor performance
-    for (let i = 0; i < numDots; i++) {
-      const dot = document.createElement("div");
-      dot.className = "grid-dot";
+      // Animação de flutuação para cada partícula
+      const particleAnimation = [
+        {
+          transform: "translate(0, 0) scale(1)",
+          opacity: 0.1 + Math.random() * 0.2,
+        },
+        {
+          transform: `translate(${-10 + Math.random() * 20}px, ${
+            -15 + Math.random() * 30
+          }px) scale(${0.8 + Math.random() * 0.4})`,
+          opacity: 0.2 + Math.random() * 0.3,
+          offset: 0.4,
+        },
+        {
+          transform: "translate(0, 0) scale(1)",
+          opacity: 0.1 + Math.random() * 0.2,
+        },
+      ];
 
-      // Posição aleatória
-      dot.style.left = `${Math.random() * 100}%`;
-      dot.style.top = `${Math.random() * 100}%`;
+      const animationTiming = {
+        duration: 5000 + Math.random() * 5000,
+        iterations: Infinity,
+        direction: "alternate",
+        easing: "cubic-bezier(0.455, 0.03, 0.515, 0.955)",
+      };
 
-      // Tamanho aleatório mas consistente com o dispositivo
-      const size = deviceDetection.isMobile ?
-        (1.5 + Math.random() * 2) :
-        (2 + Math.random() * 3);
-      dot.style.width = `${size}px`;
-      dot.style.height = `${size}px`;
-
-      // Animação aleatória otimizada para performance
-      const duration = 2 + Math.random() * 3;
-      const delay = Math.random() * 2;
-
-      // Usa CSS Transitions em vez de animations em dispositivos de baixa potência
-      if (deviceDetection.isLowPower) {
-        dot.style.transition = `opacity ${duration}s ease-in-out`;
-        setInterval(() => {
-          dot.style.opacity = dot.style.opacity === "0.1" ? "0.7" : "0.1";
-        }, duration * 1000);
-      } else {
-        dot.style.animationDuration = `${duration}s`;
-        dot.style.animationDelay = `${delay}s`;
-      }
-
-      grid.appendChild(dot);
+      // Inicia com atraso aleatório
+      setTimeout(() => {
+        particle.animate(particleAnimation, animationTiming);
+      }, Math.random() * 2000);
     }
   });
 }
 
-// Efeito de distorção em imagens com hover - VERSÃO OTIMIZADA
-document.addEventListener("DOMContentLoaded", () => {
-  const glitchImages = document.querySelectorAll(".glitch-image");
-
-  glitchImages.forEach((image) => {
-    // Não aplica em dispositivos de baixa potência
-    if (deviceDetection.isLowPower) return;
-
-    // Verifica se já tem camadas para evitar duplicação
-    const parent = image.parentNode;
-    if (parent.querySelector(".glitch-layer")) return;
-
-    // Cria camadas para o efeito glitch com melhor performance
-    for (let i = 1; i <= 2; i++) {
-      const glitchLayer = document.createElement("div");
-      glitchLayer.className = `glitch-layer glitch-layer-${i}`;
-      glitchLayer.style.backgroundImage = `url(${image.src})`;
-
-      // Adiciona propriedades para aceleração de hardware
-      glitchLayer.style.transform = "translateZ(0)";
-      glitchLayer.style.willChange = "transform, clip-path";
-
-      // Insere antes da imagem original
-      image.parentNode.insertBefore(glitchLayer, image);
-    }
-
-    // Adiciona eventos com melhor gestão de performance
-    const imageContainer = image.parentNode;
-
-    // Usa evento com throttle para evitar chamadas excessivas
-    imageContainer.addEventListener("mouseenter", throttle(() => {
-      imageContainer.classList.add("glitching");
-    }, 50));
-
-    imageContainer.addEventListener("mouseleave", throttle(() => {
-      imageContainer.classList.remove("glitching");
-    }, 50));
-  });
-});
-
-// Animação dos elementos ao scroll - VERSÃO OTIMIZADA COM INTERSECTION OBSERVER
-document.addEventListener("DOMContentLoaded", () => {
-  // Configuração aprimorada do Intersection Observer
-  const observerOptions = {
-    threshold: deviceDetection.isMobile ? 0.1 : 0.15, // Ajuste de sensibilidade por dispositivo
-    rootMargin: "0px 0px -10% 0px", // Aciona um pouco antes da visibilidade total
-  };
-
-  const animatedElements = document.querySelectorAll(
-    ".fade-in, .slide-in-left, .slide-in-right, .scale-in, .timeline-item, .certification-card, .project-card, .badge"
+// Implementa efeito de digitação para textos
+function initTextTypingEffect() {
+  const typingElements = document.querySelectorAll(
+    ".typing:not(.typing-initialized)"
   );
 
-  // Callback otimizado para melhor performance
-  const handleIntersect = (entries, observer) => {
-    entries.forEach((entry) => {
-      // Verifica se o elemento está visível
-      if (entry.isIntersecting) {
-        // Aplica classes com pequeno atraso sequencial para criar efeito cascata
-        const delay = parseFloat(entry.target.dataset.delay || 0);
+  typingElements.forEach((element) => {
+    element.classList.add("typing-initialized");
 
-        setTimeout(() => {
-          // Adiciona classe de animação apropriada
-          if (entry.target.classList.contains("timeline-item")) {
-            entry.target.classList.add("slide-up");
-          } else if (entry.target.classList.contains("project-card")) {
-            entry.target.classList.add("slide-up");
-            // Adiciona atraso baseado na posição
-            entry.target.style.animationDelay = `${delay + 0.1}s`;
-          } else if (entry.target.classList.contains("certification-card")) {
-            entry.target.classList.add("slide-up");
-          } else if (entry.target.classList.contains("badge")) {
-            entry.target.classList.add("slide-up");
-          } else {
-            entry.target.classList.add("visible");
+    // Obtém o texto original
+    const originalText = element.textContent;
+    // Limpa o elemento
+    element.textContent = "";
+
+    // Adiciona cursor de digitação
+    const cursor = document.createElement("span");
+    cursor.className = "typing-cursor";
+    cursor.textContent = "|";
+    element.appendChild(cursor);
+
+    // Usa IntersectionObserver para iniciar apenas quando visível
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Inicia a digitação após pequeno atraso
+            setTimeout(() => typeText(element, originalText, cursor), 400);
+            observer.unobserve(element);
           }
-
-          // Usa setTimeout para garantir que a transição seja completada antes de remover propriedades
-          setTimeout(() => {
-            entry.target.style.willChange = "auto"; // Libera recursos após a animação
-          }, 1000);
-        }, delay * 100);
-
-        observer.unobserve(entry.target); // Observa apenas uma vez
+        });
+      },
+      {
+        threshold: 0.2,
       }
-    });
-  };
-
-  // Cria o observer com callback otimizado
-  const observer = new IntersectionObserver(handleIntersect, observerOptions);
-
-  // Prepara e observa os elementos
-  animatedElements.forEach((element, index) => {
-    // Prepara para animação
-    element.style.willChange = "transform, opacity"; // Otimiza para as propriedades que serão animadas
-
-    // Adiciona atributo para controlar atraso baseado na posição
-    element.dataset.delay = index % 5; // Limita a 5 grupos para evitar atrasos muito longos
-
-    // Inicia observação
-    observer.observe(element);
-  });
-});
-
-// Efeito de circuito fluindo em elementos com classe circuit-animation - VERSÃO OTIMIZADA
-document.addEventListener("DOMContentLoaded", () => {
-  // Evita aplicar em dispositivos de baixa potência
-  if (deviceDetection.isLowPower) return;
-
-  const circuitElements = document.querySelectorAll(".circuit-animation");
-
-  circuitElements.forEach((element, index) => {
-    // Evitar duplicação de animações
-    if (deviceDetection.activeAnimations.circuit.includes(index)) return;
-    deviceDetection.activeAnimations.circuit.push(index);
-
-    // Verifica se já existe um canvas para evitar duplicação
-    if (element.querySelector(".circuit-canvas")) return;
-
-    // Cria canvas para desenhar o circuito com configurações otimizadas
-    const canvas = document.createElement("canvas");
-    canvas.className = "circuit-canvas";
-    canvas.style.pointerEvents = "none"; // Desabilita interações
-    canvas.style.transform = "translateZ(0)"; // Aceleração de hardware
-    canvas.style.willChange = "transform"; // Otimizado para animações
-    element.appendChild(canvas);
-
-    const ctx = canvas.getContext("2d", { alpha: true }); // Contexto otimizado
-
-    // Configura o canvas para preencher o elemento
-    function resizeCanvas() {
-      // Reduz resolução em dispositivos móveis para melhorar performance
-      const scaleFactor = deviceDetection.isMobile ? 0.75 : 1;
-      canvas.width = element.offsetWidth * scaleFactor;
-      canvas.height = element.offsetHeight * scaleFactor;
-    }
-
-    resizeCanvas();
-    window.addEventListener("resize", throttle(resizeCanvas, 250));
-
-    // Pontos do circuito - reduz densidade em dispositivos de menor capacidade
-    const points = [];
-    const divisor = deviceDetection.isDesktop ? 45 :
-      deviceDetection.isTablet ? 35 : 30;
-    const numPoints = Math.min(
-      Math.floor(element.offsetWidth / divisor),
-      deviceDetection.isDesktop ? 40 :
-        deviceDetection.isTablet ? 30 : 20
     );
 
-    for (let i = 0; i < numPoints; i++) {
-      points.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * (deviceDetection.isDesktop ? 1 : 1.5), // Velocidade ajustada
-        vy: (Math.random() - 0.5) * (deviceDetection.isDesktop ? 1 : 1.5),
-      });
-    }
-
-    // Taxa de atualização adaptativa por dispositivo
-    const frameRate = deviceDetection.isDesktop ? 30 : 24; // Reduzido para melhor performance
-    const frameDelay = 1000 / frameRate;
-    let lastFrameTime = 0;
-
-    // Função para desenhar o circuito com otimizações
-    function drawCircuit(timestamp) {
-      // Controle de framerate mais preciso
-      if (timestamp - lastFrameTime < frameDelay) {
-        requestAnimationFrame(drawCircuit);
-        return;
-      }
-
-      lastFrameTime = timestamp;
-
-      // Limpa com contexto otimizado
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Desenha as linhas de conexão
-      ctx.strokeStyle = "rgba(0, 168, 255, 0.2)";
-      ctx.lineWidth = deviceDetection.isMobile ? 0.5 : 1;
-
-      // Ajusta o raio de conexão baseado no dispositivo
-      const connectionRadius = deviceDetection.isDesktop ? 80 :
-        deviceDetection.isTablet ? 90 : 100;
-
-      // Otimização: pré-calcula todas as distâncias entre pontos
-      const connections = [];
-      for (let i = 0; i < points.length; i++) {
-        for (let j = i + 1; j < points.length; j++) {
-          const dx = points[i].x - points[j].x;
-          const dy = points[i].y - points[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < connectionRadius) {
-            connections.push({
-              x1: points[i].x,
-              y1: points[i].y,
-              x2: points[j].x,
-              y2: points[j].y,
-              opacity: 1 - (distance / connectionRadius)
-            });
-          }
-        }
-      }
-
-      // Desenha todas as conexões de uma vez
-      connections.forEach(conn => {
-        ctx.beginPath();
-        ctx.strokeStyle = `rgba(0, 168, 255, ${conn.opacity * 0.2})`;
-        ctx.moveTo(conn.x1, conn.y1);
-        ctx.lineTo(conn.x2, conn.y2);
-        ctx.stroke();
-      });
-
-      // Desenha os pontos com tamanho adaptativo
-      const pointRadius = deviceDetection.isMobile ? 1.5 : 2;
-      ctx.fillStyle = "rgba(0, 168, 255, 0.7)";
-
-      for (let i = 0; i < points.length; i++) {
-        ctx.beginPath();
-        ctx.arc(points[i].x, points[i].y, pointRadius, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Move os pontos com física suavizada
-        points[i].x += points[i].vx;
-        points[i].y += points[i].vy;
-
-        // Rebate nas bordas com amortecimento
-        if (points[i].x < 0 || points[i].x > canvas.width) {
-          points[i].vx *= -0.95; // Amortecimento
-          points[i].x = Math.max(0, Math.min(points[i].x, canvas.width));
-        }
-        if (points[i].y < 0 || points[i].y > canvas.height) {
-          points[i].vy *= -0.95; // Amortecimento
-          points[i].y = Math.max(0, Math.min(points[i].y, canvas.height));
-        }
-      }
-
-      // Usa requestAnimationFrame para sincronizar com ciclo de renderização
-      requestAnimationFrame(drawCircuit);
-    }
-
-    // Inicia a animação com requestionAnimationFrame
-    requestAnimationFrame(drawCircuit);
-
-    // Pausar animação quando elemento não estiver visível
-    const visibilityObserver = new IntersectionObserver((entries) => {
-      const isVisible = entries[0].isIntersecting;
-      if (isVisible) {
-        requestAnimationFrame(drawCircuit);
-      }
-    }, { threshold: 0.1 });
-
-    visibilityObserver.observe(element);
+    observer.observe(element);
   });
-});
+
+  function typeText(element, text, cursor) {
+    const characters = text.split("");
+    let index = 0;
+
+    // Define velocidade de digitação aleatória para efeito mais natural
+    function getTypeSpeed() {
+      const baseSpeed = 50;
+      const variation = 40;
+      return baseSpeed + Math.random() * variation;
+    }
+
+    // Função recursiva para digitar caractere por caractere
+    function type() {
+      if (index < characters.length) {
+        // Cria elemento span para o caractere
+        const charElement = document.createElement("span");
+        charElement.textContent = characters[index];
+        element.insertBefore(charElement, cursor);
+
+        // Possível animação sutil para o caractere recém-digitado
+        const charAnimation = [
+          { opacity: 0, transform: "translateY(5px)" },
+          { opacity: 1, transform: "translateY(0)" },
+        ];
+
+        const charTiming = {
+          duration: 100,
+          fill: "forwards",
+          easing: "cubic-bezier(0.215, 0.61, 0.355, 1)",
+        };
+
+        charElement.animate(charAnimation, charTiming);
+
+        index++;
+
+        // Programa o próximo caractere
+        setTimeout(type, getTypeSpeed());
+      } else {
+        // Digitação concluída
+        element.classList.add("typing-done");
+
+        // Animação sutil de fade out/in para o cursor
+        const blinkAnimation = [{ opacity: 1 }, { opacity: 0 }, { opacity: 1 }];
+
+        const blinkTiming = {
+          duration: 800,
+          iterations: Infinity,
+        };
+
+        cursor.animate(blinkAnimation, blinkTiming);
+      }
+    }
+
+    // Inicia o efeito de digitação
+    type();
+  }
+}

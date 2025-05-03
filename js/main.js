@@ -10,18 +10,33 @@ document.addEventListener("DOMContentLoaded", () => {
     lastScrollY: window.scrollY,
     ticking: false,
     // Detecta capacidade do dispositivo
-    isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
-    prefersReducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-    supportsIntersectionObserver: 'IntersectionObserver' in window
+    isMobile:
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      ),
+    prefersReducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)")
+      .matches,
+    supportsIntersectionObserver: "IntersectionObserver" in window,
   };
 
   // Inicializa todas as funcionalidades
-  initializeParticles();
   initializeNavigation();
   initializeScrollEffects();
-  initializeCounters();
+  initializeAdvancedCounters(); // Usando nova função de contador aprimorada
   addScanlines();
   addStaticEffect();
+
+  // Lazy load particles effect for better initial load performance
+  if (performance.supportsIntersectionObserver) {
+    const observer = new IntersectionObserver(() => {
+      initializeParticles();
+      observer.disconnect();
+    });
+    observer.observe(document.querySelector("#home"));
+  } else {
+    // Fallback for browsers without IntersectionObserver
+    initializeParticles();
+  }
 
   // Inicializa o Security Dashboard (certificando-se que ele é carregado)
   if (typeof SecurityDashboard === "function") {
@@ -34,9 +49,13 @@ function throttle(callback, delay = 100) {
   let isThrottled = false;
   return function (...args) {
     if (!isThrottled) {
-      callback.apply(this, args);
-      isThrottled = true;
-      setTimeout(() => { isThrottled = false; }, delay);
+      requestAnimationFrame(() => {
+        callback.apply(this, args);
+        isThrottled = true;
+        setTimeout(() => {
+          isThrottled = false;
+        }, delay);
+      });
     }
   };
 }
@@ -45,7 +64,10 @@ function throttle(callback, delay = 100) {
 function initializeParticles() {
   if (typeof particlesJS !== "undefined") {
     // Detecta capacidade do dispositivo para ajustar configurações
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isMobile =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      );
     const particleCount = isMobile ? 40 : 80;
     const particleSpeed = isMobile ? 0.8 : 1;
     const lineOpacity = isMobile ? 0.3 : 0.4;
@@ -183,7 +205,7 @@ function initializeNavigation() {
           targetSection.scrollIntoView({
             behavior: "smooth",
             block: "start",
-            inline: "nearest"
+            inline: "nearest",
           });
 
           // Atualiza URL sem causar scroll adicional
@@ -231,7 +253,7 @@ function initializeNavigation() {
 // Efeitos de scroll - VERSÃO SUPER SUAVE para as Seções de Cards
 function initializeScrollEffects() {
   // Verifica suporte para IntersectionObserver
-  if (!('IntersectionObserver' in window)) {
+  if (!("IntersectionObserver" in window)) {
     // Fallback para navegadores antigos
     const simpleAnimateElements = () => {
       const elements = document.querySelectorAll(
@@ -259,8 +281,8 @@ function initializeScrollEffects() {
   // Versão com IntersectionObserver para melhor performance
   const certObserverOptions = {
     root: null,
-    rootMargin: '0px 0px -5% 0px', // Menor margem para animar mais cedo
-    threshold: 0.1 // Mais sensível para acionar animação com menos scroll
+    rootMargin: "0px 0px -5% 0px", // Menor margem para animar mais cedo
+    threshold: 0.1, // Mais sensível para acionar animação com menos scroll
   };
 
   const handleCertIntersect = (entries, observer) => {
@@ -274,13 +296,16 @@ function initializeScrollEffects() {
   };
 
   // Observer específico para elementos de certificação e badges
-  const certObserver = new IntersectionObserver(handleCertIntersect, certObserverOptions);
+  const certObserver = new IntersectionObserver(
+    handleCertIntersect,
+    certObserverOptions
+  );
 
   // Observer para outros elementos com animação padrão
   const regularObserverOptions = {
     root: null,
-    rootMargin: '0px 0px -10% 0px',
-    threshold: 0.15
+    rootMargin: "0px 0px -10% 0px",
+    threshold: 0.15,
   };
 
   const handleRegularIntersect = (entries, observer) => {
@@ -296,12 +321,13 @@ function initializeScrollEffects() {
     });
   };
 
-  const regularObserver = new IntersectionObserver(handleRegularIntersect, regularObserverOptions);
+  const regularObserver = new IntersectionObserver(
+    handleRegularIntersect,
+    regularObserverOptions
+  );
 
   // Seleciona e observa elementos de certificação com o observer especializado
-  const certElements = document.querySelectorAll(
-    ".certification-card, .badge"
-  );
+  const certElements = document.querySelectorAll(".certification-card, .badge");
 
   certElements.forEach((element) => {
     certObserver.observe(element);
@@ -319,95 +345,162 @@ function initializeScrollEffects() {
   });
 }
 
-// Inicializa contadores - VERSÃO SUPER SUAVE
-function initializeCounters() {
+// COMPLETAMENTE REVAMPADO: Sistema de animação de contador avançado
+function initializeAdvancedCounters() {
   const counters = document.querySelectorAll(".counter");
 
-  // Verifica se tem contadores na página
   if (!counters.length) return;
 
-  // Verifica suporte para IntersectionObserver
-  if (!('IntersectionObserver' in window)) {
+  // Usa IntersectionObserver moderno quando disponível
+  if (!("IntersectionObserver" in window)) {
     // Fallback para navegadores antigos
-    const startCounters = () => {
+    const simpleCounterInit = () => {
       counters.forEach((counter) => {
         if (counter.dataset.counted === "true") return;
 
         const elementTop = counter.getBoundingClientRect().top;
         if (elementTop < window.innerHeight) {
-          animateCounter(counter);
+          startAdvancedCounter(counter);
           counter.dataset.counted = "true";
-          // Adiciona classe para animação super suave
           counter.classList.add("visible-counter");
         }
       });
     };
 
-    window.addEventListener("scroll", throttle(startCounters, 100));
-    startCounters(); // Verifica imediatamente na carga
+    window.addEventListener("scroll", throttle(simpleCounterInit, 100));
+    simpleCounterInit();
     return;
   }
 
-  // Usando IntersectionObserver para melhor performance
+  // Implementação aprimorada de IntersectionObserver
   const observerOptions = {
-    threshold: 0.2, // Reduzido para iniciar animação mais cedo
-    rootMargin: '0px 0px -10% 0px', // Margem para começar animação antes de aparecer completamente
+    threshold: 0.2,
+    rootMargin: "0px 0px -10% 0px",
   };
 
-  const handleIntersect = (entries, observer) => {
+  const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         setTimeout(() => {
-          // Adiciona classe para animação super suave
           entry.target.classList.add("visible-counter");
-          animateCounter(entry.target);
-        }, 200); // Pequeno atraso para suavizar
-        observer.unobserve(entry.target);
+          startAdvancedCounter(entry.target);
+        }, 200);
+        counterObserver.unobserve(entry.target);
       }
     });
-  };
-
-  const observer = new IntersectionObserver(handleIntersect, observerOptions);
+  }, observerOptions);
 
   counters.forEach((counter) => {
-    observer.observe(counter);
+    counterObserver.observe(counter);
   });
 
-  // Função para animar o contador com efeito mais suave
-  function animateCounter(counter) {
-    const target = parseInt(counter.getAttribute("data-target"), 10);
-    const counterValue = counter.querySelector(".counter-value");
+  // Nova função aprimorada de animação de contador com formatação adequada de moeda e precisão
+  function startAdvancedCounter(counterElement) {
+    // Obtém o valor alvo como string primeiro para preservar a formatação
+    const targetValueString = counterElement.getAttribute("data-target");
+    const counterDisplay = counterElement.querySelector(".counter-value");
 
-    if (!counterValue) return;
+    if (!counterDisplay) return;
 
-    // Otimizado para usar requestAnimationFrame com animação mais lenta e suave
-    const duration = 2000; // Aumentado para animação mais gradual
-    const startTime = performance.now();
+    // Detecta se é um contador de moeda
+    const isCurrency =
+      targetValueString.includes("$") ||
+      targetValueString.includes("€") ||
+      targetValueString.includes("£") ||
+      targetValueString.includes("¥");
 
-    // Função de easing personalizada para movimento mais natural
-    const easeOutElastic = t => {
-      const p = 0.3;
-      return Math.pow(2, -10 * t) * Math.sin((t - p / 4) * (2 * Math.PI) / p) + 1;
-    };
+    // Analisa o valor alvo corretamente - lida com símbolos de moeda e vírgulas
+    let prefix = "",
+      suffix = "",
+      targetNumber;
 
-    const updateCounter = (timestamp) => {
-      // Calcula o progresso (0 a 1)
-      const elapsed = timestamp - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-
-      // Aplica easing para movimento mais natural
-      const easedProgress = easeOutElastic(progress);
-      const currentValue = Math.floor(easedProgress * target);
-
-      // Atualiza o valor
-      counterValue.textContent = currentValue;
-
-      // Continua animação se não terminou
-      if (progress < 1) {
-        requestAnimationFrame(updateCounter);
+    if (isCurrency) {
+      // Extrai prefixo/sufixo de moeda e valor numérico
+      const currencyMatch = targetValueString.match(
+        /^([^\d]*)(\d[\d,.]*)([^\d]*)$/
+      );
+      if (currencyMatch) {
+        prefix = currencyMatch[1]; // Símbolo ou prefixo de moeda
+        const numericPart = currencyMatch[2].replace(/,/g, ""); // Remove vírgulas
+        targetNumber = parseFloat(numericPart);
+        suffix = currencyMatch[3]; // Qualquer sufixo
+      } else {
+        // Fallback se a correspondência falhar
+        targetNumber = parseFloat(targetValueString.replace(/[^\d.]/g, ""));
       }
+    } else {
+      // Número regular
+      targetNumber = parseInt(targetValueString.replace(/[^\d]/g, ""), 10);
+    }
+
+    // Padrão para 0 se a análise falhar
+    if (isNaN(targetNumber)) {
+      targetNumber = 0;
+    }
+
+    // Configuração de animação
+    const duration = 2000; // Duração da animação em ms
+    const framesPerSecond = 60;
+    const totalFrames = (duration / 1000) * framesPerSecond;
+    let currentFrame = 0;
+
+    // Função de easing personalizada para movimento natural
+    const easeOutExpo = (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
+
+    // Para formatar números com vírgulas
+    const formatNumber = (num) => {
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
 
+    // Formatador de moeda, se necessário
+    const formatCurrency = (num) => {
+      // Determina se devemos mostrar casas decimais
+      const hasDecimal = targetNumber % 1 !== 0;
+      const digits = hasDecimal ? 2 : 0;
+      return formatNumber(num.toFixed(digits));
+    };
+
+    // Função de animação usando requestAnimationFrame
+    function updateCounter() {
+      currentFrame++;
+
+      // Calcula o progresso atual (0 a 1)
+      const progress = currentFrame / totalFrames;
+
+      // Aplica easing para animação natural
+      const easedProgress = easeOutExpo(Math.min(progress, 1));
+
+      // Calcula o valor atual
+      let currentValue = Math.floor(easedProgress * targetNumber);
+
+      // Formata o valor apropriadamente
+      let displayValue;
+      if (isCurrency) {
+        displayValue = formatCurrency(currentValue);
+      } else {
+        displayValue = formatNumber(currentValue);
+      }
+
+      // Atualiza a exibição
+      counterDisplay.textContent = displayValue;
+
+      // Continua a animação se não estiver completa
+      if (currentFrame < totalFrames) {
+        requestAnimationFrame(updateCounter);
+      } else {
+        // Garante que o valor final seja exatamente o alvo
+        if (isCurrency) {
+          counterDisplay.textContent = formatCurrency(targetNumber);
+        } else {
+          counterDisplay.textContent = formatNumber(targetNumber);
+        }
+
+        // Adiciona classe de conclusão para estilização adicional
+        counterElement.classList.add("counter-complete");
+      }
+    }
+
+    // Inicia a animação
     requestAnimationFrame(updateCounter);
   }
 }
@@ -495,7 +588,8 @@ document.addEventListener("DOMContentLoaded", () => {
           successMsg.offsetHeight;
 
           // Aplica a transição
-          successMsg.style.transition = "opacity 0.3s ease, transform 0.3s ease";
+          successMsg.style.transition =
+            "opacity 0.3s ease, transform 0.3s ease";
           successMsg.style.opacity = "1";
           successMsg.style.transform = "translateY(0)";
         }

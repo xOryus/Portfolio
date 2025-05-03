@@ -1,962 +1,1045 @@
 /*
- * ANIMATIONS CSS - EFEITOS VISUAIS CYBERSECURITY
- * Animações e efeitos visuais para o portfólio com tema hacker - VERSÃO OTIMIZADA
- * Implementa animações com alta performance usando propriedades específicas para GPU
+ * ANIMATIONS CSS - EFEITOS VISUAIS AVANÇADOS
+ * Animações otimizadas para Glassmorphism em tema de cibersegurança
+ * Implementa animações de alta performance usando propriedades específicas da GPU
 */
 
-/* Efeito Matrix (chuva digital) */
+/* Efeito Matrix digital rain aprimorado */
 
-.matrix-rain {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    /* Aceleração de hardware */
-    transform: translateZ(0);
-    will-change: transform;
+.matrix-effect-bg {
+  position: fixed;
+  z-index: -3;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  transform: translateZ(0);
+  pointer-events: none;
+
+  opacity: 0.05;
+
+  will-change: transform;
 }
 
-.matrix-rain canvas {
-    display: block;
-    width: 100%;
-    height: 100%;
-    /* Aceleração de hardware */
-    transform: translateZ(0);
+/* Efeito de chuva digital para tema cyber */
+
+.digital-rain-canvas {
+  position: fixed;
+  z-index: -4;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  transform: translateZ(0);
+  pointer-events: none;
+
+  opacity: 0.05;
+
+  will-change: transform;
 }
 
-/* Efeito Glitch - Versão otimizada */
+/* Efeito Glitch aprimorado */
 
 .glitch {
-    position: relative;
-    /* Adiciona aceleração de hardware */
-    transform: translate3d(0, 0, 0);
-    will-change: transform, text-shadow;
+  position: relative;
+
+  transform: translate3d(0, 0, 0);
+
+  will-change: transform, text-shadow;
 }
 
 .glitch::before,
 .glitch::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    clip: rect(0, 0, 0, 0);
-    width: 100%;
-    height: 100%;
-    content: attr(data-text);
-    /* Reduz CPU utilizando a propriedade transform */
-    transform: translate3d(0, 0, 0);
-    will-change: clip, transform;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  clip: rect(0, 0, 0, 0);
+
+  width: 100%;
+  height: 100%;
+
+  content: attr(data-text);
+  transform: translate3d(0, 0, 0);
+
+  will-change: clip, transform;
 }
 
 .glitch::before {
-    left: 2px;
-    animation: glitch-anim-1 5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite alternate-reverse;
-    text-shadow: -2px 0 var(--color-secondary);
+  left: 2px;
+
+  animation: glitch-anim-1 5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite alternate-reverse;
+
+  text-shadow: -2px 0 var(--color-secondary);
 }
 
 .glitch::after {
-    left: -2px;
-    animation: glitch-anim-2 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite alternate-reverse;
-    text-shadow: -2px 0 var(--color-accent);
+  left: -2px;
+
+  animation: glitch-anim-2 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite alternate-reverse;
+
+  text-shadow: -2px 0 var(--color-accent);
 }
 
-/* Versão mais eficiente e elegante para efeito glitch */
+/* Glitch ativo para estados hover */
+
 .active-glitch::before {
-    animation: glitch-anim-1 0.3s ease-in-out infinite alternate-reverse;
+  animation: glitch-anim-1 0.3s ease-in-out infinite alternate-reverse;
 }
 
 .active-glitch::after {
-    animation: glitch-anim-2 0.2s ease-in-out infinite alternate-reverse;
+  animation: glitch-anim-2 0.2s ease-in-out infinite alternate-reverse;
 }
 
-/* Animações Glitch mais suaves e eficientes */
+/* Glitch intenso para efeitos especiais */
+
+.intense-glitch::before {
+  animation: glitch-anim-1 0.15s ease-in-out infinite alternate-reverse;
+
+  text-shadow: -3px 0 var(--color-secondary);
+}
+
+.intense-glitch::after {
+  animation: glitch-anim-2 0.1s ease-in-out infinite alternate-reverse;
+
+  text-shadow: 3px 0 var(--color-accent);
+}
+
+/* Animações de glitch mais suaves e eficientes */
+
 @keyframes glitch-anim-1 {
 
-    0%,
-    12%,
-    22%,
-    32%,
-    42%,
-    52%,
-    62%,
-    72%,
-    82%,
-    92% {
-        clip: rect(30px, 9999px, 10px, 0);
-        transform: translateX(0px);
-    }
+0%,
+12%,
+22%,
+32%,
+42%,
+52%,
+62%,
+72%,
+82%,
+92% {
+  clip: rect(30px, 9999px, 10px, 0);
 
-    5%,
-    15%,
-    25%,
-    35%,
-    45%,
-    55%,
-    65%,
-    75%,
-    85%,
-    95% {
-        clip: rect(76px, 9999px, 5px, 0);
-        transform: translateX(-2px);
-    }
-
-    10%,
-    20%,
-    30%,
-    40%,
-    50%,
-    60%,
-    70%,
-    80%,
-    90%,
-    100% {
-        clip: rect(92px, 9999px, 60px, 0);
-        transform: translateX(2px);
-    }
+  transform: translateX(0px);
 }
 
+5%,
+15%,
+25%,
+35%,
+45%,
+55%,
+65%,
+75%,
+85%,
+95% {
+  clip: rect(76px, 9999px, 5px, 0);
+
+  transform: translateX(-2px);
+}
+
+10%,
+20%,
+30%,
+40%,
+50%,
+60%,
+70%,
+80%,
+90%,
+100% {
+  clip: rect(92px, 9999px, 60px, 0);
+
+  transform: translateX(2px);
+}
+
+}
 @keyframes glitch-anim-2 {
 
-    0%,
-    12%,
-    22%,
-    32%,
-    42%,
-    52%,
-    62%,
-    72%,
-    82%,
-    92% {
-        clip: rect(73px, 9999px, 75px, 0);
-        transform: translateX(0px);
-    }
+0%,
+12%,
+22%,
+32%,
+42%,
+52%,
+62%,
+72%,
+82%,
+92% {
+  clip: rect(73px, 9999px, 75px, 0);
 
-    5%,
-    15%,
-    25%,
-    35%,
-    45%,
-    55%,
-    65%,
-    75%,
-    85%,
-    95% {
-        clip: rect(47px, 9999px, 30px, 0);
-        transform: translateX(-2px);
-    }
-
-    10%,
-    20%,
-    30%,
-    40%,
-    50%,
-    60%,
-    70%,
-    80%,
-    90%,
-    100% {
-        clip: rect(86px, 9999px, 44px, 0);
-        transform: translateX(2px);
-    }
+  transform: translateX(0px);
 }
 
-/* Efeito de digitação no terminal - Versão otimizada */
+5%,
+15%,
+25%,
+35%,
+45%,
+55%,
+65%,
+75%,
+85%,
+95% {
+  clip: rect(47px, 9999px, 30px, 0);
+
+  transform: translateX(-2px);
+}
+
+10%,
+20%,
+30%,
+40%,
+50%,
+60%,
+70%,
+80%,
+90%,
+100% {
+  clip: rect(86px, 9999px, 44px, 0);
+
+  transform: translateX(2px);
+}
+
+}
+
+/* Efeito de digitação otimizado */
 
 .typing {
-    display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 3px solid var(--color-primary);
-    /* Melhora desempenho */
-    will-change: width;
+  display: inline-block;
+  overflow: hidden;
+
+  min-height: 1em;
+
+  white-space: nowrap;
+
+  will-change: width;
+}
+
+.typing-cursor {
+  display: inline-block;
+
+  margin-left: 1px;
+
+  animation: blink-caret 0.75s step-end infinite;
+  vertical-align: middle;
 }
 
 .typing-done {
-    border-right: 3px solid var(--color-primary);
-    animation: blink-caret 0.75s step-end infinite;
-}
-
-@keyframes typing {
-    from {
-        width: 0;
-    }
-
-    to {
-        width: 100%;
-    }
+  opacity: 1;
 }
 
 @keyframes blink-caret {
 
-    from,
-    to {
-        border-color: transparent;
-    }
-
-    50% {
-        border-color: var(--color-primary);
-    }
+from,
+to {
+  opacity: 1;
 }
 
-/* Efeito de hover nas cards - Versão otimizada */
+50% {
+  opacity: 0;
+}
+
+}
+
+/* Efeito de brilho hover para cartões de vidro */
 
 .hover-glow {
-    /* Transição melhorada para GPU */
-    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
-        box-shadow 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-    will-change: transform, box-shadow;
+  transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) , box-shadow 0.3s cubic-bezier( 0.165, 0.84, 0.44, 1);
+
+  will-change: transform, box-shadow;
 }
 
 .hover-glow:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 168, 255, 0.4);
+  transform: translateY(-5px);
+
+  box-shadow: 0 8px 25px rgba(0, 168, 255, 0.3);
 }
 
-/* Efeito de carregamento - Versão otimizada */
+/* Efeito de carregamento otimizado */
 
 .loading {
-    position: relative;
-    overflow: hidden;
-    width: 150px;
-    height: 4px;
-    margin: 20px auto;
-    border-radius: 2px;
-    background-color: rgba(255, 255, 255, 0.1);
-    /* Melhora desempenho */
-    will-change: opacity;
+  position: relative;
+
+  overflow: hidden;
+
+  width: 150px;
+  height: 4px;
+  margin: 20px auto;
+
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.05);
+
+  will-change: opacity;
 }
 
 .loading::after {
-    position: absolute;
-    top: 0;
-    left: -50%;
-    width: 50%;
-    height: 100%;
-    content: '';
-    /* Transição mais suave e hardware accelerated */
-    animation: loading 1.5s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
-    will-change: transform, opacity;
-    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  position: absolute;
+  top: 0;
+  left: -50%;
+
+  width: 50%;
+  height: 100%;
+
+  content: '';
+  animation: loading 1.5s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+
+  background: linear-gradient(90deg, transparent, var( --color-primary) , transparent);
+
+  will-change: transform, opacity;
 }
 
 @keyframes loading {
-    0% {
-        transform: translateX(0);
-    }
 
-    100% {
-        transform: translateX(400%);
-    }
+0% {
+  transform: translateX(0);
 }
 
-/* Scanlines (efeito de linhas horizontais) - Versão otimizada */
+100% {
+  transform: translateX(400%);
+}
+
+}
+
+/* Efeito de scanlines (opacidade reduzida para melhor legibilidade) */
 
 .scanlines {
-    position: fixed;
-    z-index: 9;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    opacity: 0.08;
-    /* Reduzido para melhor leitura */
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.04) 50%);
-    background-size: 100% 4px;
-    /* Aceleração de hardware */
-    transform: translateZ(0);
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  transform: translateZ(0);
+  pointer-events: none;
+
+  opacity: 0.05;
+  background: linear-gradient(0deg, rgba( 0, 0, 0, 0) 50%, rgba( 0, 0, 0, 0.04) 50%);
+  background-size: 100% 4px;
 }
 
-/* Efeito de texto neon - Versão otimizada */
+/* Efeito de texto neon para destaques */
 
 .neon-text {
-    animation: neon-pulse 2s infinite alternate cubic-bezier(0.455, 0.03, 0.515, 0.955);
-    will-change: text-shadow;
-    color: var(--color-text);
-    text-shadow: 0 0 5px var(--color-text),
-        0 0 10px var(--color-text),
-        0 0 20px var(--color-primary),
-        0 0 30px var(--color-primary);
+  animation: neon-pulse 2s infinite alternate cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+  color: var(--color-text);
+  text-shadow: 0 0 5px var(--color-text) , 0 0 10px var( --color-text) , 0 0 20px var( --color-primary) , 0 0 30px var( --color-primary);
+
+  will-change: text-shadow;
 }
 
 @keyframes neon-pulse {
-    from {
-        text-shadow: 0 0 5px var(--color-text),
-            0 0 10px var(--color-text),
-            0 0 20px var(--color-primary),
-            0 0 30px var(--color-primary);
-    }
 
-    to {
-        text-shadow: 0 0 5px var(--color-text),
-            0 0 10px var(--color-text),
-            0 0 25px var(--color-primary),
-            0 0 35px var(--color-primary),
-            0 0 45px var(--color-primary);
-    }
+from {
+  text-shadow: 0 0 5px var(--color-text) , 0 0 10px var( --color-text) , 0 0 20px var( --color-primary) , 0 0 30px var( --color-primary);
 }
 
-/* Efeito de escaneamento (para cards) - Versão otimizada */
+to {
+  text-shadow: 0 0 5px var(--color-text) , 0 0 10px var( --color-text) , 0 0 25px var( --color-primary) , 0 0 35px var( --color-primary) , 0 0 45px var( --color-primary);
+}
+
+}
+
+/* Efeito de escaneamento para cartões de vidro */
 
 .scan-effect {
-    position: relative;
-    overflow: hidden;
-    /* Melhora desempenho */
-    will-change: transform;
+  position: relative;
+
+  overflow: hidden;
+
+  will-change: transform;
 }
 
 .scan-effect::before {
-    position: absolute;
-    z-index: 1;
-    top: -100%;
-    left: 0;
-    width: 100%;
-    height: 10px;
-    content: '';
-    /* Animação mais suave */
-    animation: scanning 3s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-    will-change: transform, opacity;
-    background: linear-gradient(to bottom,
-            rgba(0, 168, 255, 0),
-            rgba(0, 168, 255, 0.3),
-            rgba(0, 168, 255, 0));
+  position: absolute;
+  z-index: 1;
+  top: -100%;
+  left: 0;
+
+  width: 100%;
+  height: 15px;
+
+  content: '';
+  animation: scanning 3s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+
+  background: linear-gradient(to bottom, rgba( 0, 168, 255, 0) , rgba( 0, 168, 255, 0.2) , rgba( 0, 168, 255, 0) );
+
+  will-change: transform, opacity;
 }
 
 @keyframes scanning {
-    0% {
-        transform: translateY(0);
-        opacity: 0.5;
-    }
 
-    50% {
-        opacity: 0.8;
-    }
+0% {
+  transform: translateY(0);
 
-    100% {
-        transform: translateY(1000%);
-        opacity: 0.5;
-    }
+  opacity: 0.5;
 }
 
-/* Efeito de grid digital (usado como background) - Versão otimizada */
+50% {
+  opacity: 0.8;
+}
+
+100% {
+  transform: translateY(1000%);
+
+  opacity: 0.5;
+}
+
+}
+
+/* Efeito de grade digital para fundos de vidro */
 
 .digital-grid {
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Aceleração de hardware */
-    transform: translateZ(0);
-    will-change: opacity;
-    background-image: linear-gradient(rgba(0, 168, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 168, 255, 0.05) 1px, transparent 1px);
-    background-size: 30px 30px;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  transform: translateZ(0);
+
+  background-image: linear-gradient(rgba( 0, 168, 255, 0.03) 1px, transparent 1px) , linear-gradient( 90deg, rgba( 0, 168, 255, 0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+
+  will-change: opacity;
 }
 
-/* Grid dots */
+/* Pontos de grade para cartões de vidro */
+
 .grid-dot {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background-color: rgba(0, 168, 255, 0.6);
-    animation: pulse-dot 3s ease-in-out infinite;
-    will-change: opacity, transform;
+  position: absolute;
+
+  width: 3px;
+  height: 3px;
+
+  animation: pulse-dot 3s ease-in-out infinite;
+
+  border-radius: 50%;
+  background-color: rgba(0, 168, 255, 0.4);
+
+  will-change: opacity, transform;
 }
 
 @keyframes pulse-dot {
 
-    0%,
-    100% {
-        opacity: 0.2;
-        transform: scale(0.8);
-    }
+0%,
+100% {
+  transform: scale(0.8);
 
-    50% {
-        opacity: 0.8;
-        transform: scale(1.2);
-    }
+  opacity: 0.2;
 }
 
-/* Efeito de estática na página - Versão otimizada */
+50% {
+  transform: scale(1.2);
+
+  opacity: 0.6;
+}
+
+}
+
+/* Efeito estático (reduzido para melhor desempenho) */
 
 .static-effect {
-    position: fixed;
-    z-index: 8;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    opacity: 0.02;
-    /* Reduzido para melhor performance */
-    /* Aceleração de hardware */
-    transform: translateZ(0);
-    background-image: url("data:image/svg+xml, %3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url( %23noiseFilter) '/%3E%3C/svg%3E");
+  position: fixed;
+  z-index: 8;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  transform: translateZ(0);
+  pointer-events: none;
+
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml, %3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url( %23noiseFilter) '/%3E%3C/svg%3E");
 }
 
-/* Efeito circular nos botões - Versão otimizada */
+/* Efeito circular para botões no estilo glassmorphism */
 
 .circle-effect {
-    position: relative;
-    overflow: hidden;
-    /* Aceleração de hardware */
-    will-change: transform;
+  position: relative;
+
+  overflow: hidden;
+
+  will-change: transform;
 }
 
 .circle-effect::before {
-    position: absolute;
-    z-index: 0;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    content: '';
-    /* Transição mais suave */
-    transition: width 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
-        height 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-    transform: translate(-50%, -50%);
-    will-change: width, height, opacity;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+
+  width: 0;
+  height: 0;
+
+  content: '';
+  transition: width 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) , height 0.6s cubic-bezier( 0.165, 0.84, 0.44, 1);
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+
+  will-change: width, height, opacity;
 }
 
 .circle-effect:hover::before {
-    width: 220%;
-    height: 220%;
+  width: 220%;
+  height: 220%;
 }
 
-/* Efeito de contorno no hover - Versão otimizada */
+/* Efeito de contorno hover para cartões de vidro */
 
 .outline-hover {
-    position: relative;
-    z-index: 1;
-    /* Aceleração de hardware */
-    will-change: transform;
+  position: relative;
+  z-index: 1;
+
+  will-change: transform;
 }
 
 .outline-hover::before {
-    position: absolute;
-    z-index: -1;
-    top: -3px;
-    right: -3px;
-    bottom: -3px;
-    left: -3px;
-    content: '';
-    /* Transição mais suave */
-    transition: opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-    will-change: opacity;
-    opacity: 0;
-    border: 1px solid var(--color-primary);
+  position: absolute;
+  z-index: -1;
+  top: -3px;
+  right: -3px;
+  bottom: -3px;
+  left: -3px;
+
+  content: '';
+  transition: opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+  opacity: 0;
+  border: 1px solid var(--color-primary);
+  border-radius: 14px;
+
+  will-change: opacity;
 }
 
 .outline-hover:hover::before {
-    opacity: 0.3;
+  opacity: 0.3;
 }
 
-/* Efeito slide para cards - Versão otimizada */
+/* Animação slide-up para cartões de vidro */
 
 @keyframes slide-up {
-    0% {
-        transform: translateY(30px);
-        opacity: 0;
-    }
 
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
+0% {
+  transform: translateY(30px);
+
+  opacity: 0;
+}
+
+100% {
+  transform: translateY(0);
+
+  opacity: 1;
+}
+
 }
 
 .slide-up {
-    animation: slide-up 0.7s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-    will-change: transform, opacity;
+  animation: slide-up 0.7s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+
+  will-change: transform, opacity;
 }
 
-/* Animações para elementos específicos */
-.certification-card {
-    will-change: transform, box-shadow;
-    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-        box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+/* Animações para elementos específicos de glassmorphism */
+
+.glass-effect {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) , box-shadow 0.5s cubic-bezier( 0.22, 1, 0.36, 1) , background 0.5s cubic-bezier( 0.22, 1, 0.36, 1);
+
+  will-change: transform, box-shadow, background;
 }
 
-.timeline-content,
-.project-card {
-    will-change: transform, opacity;
+.timeline-content.glass-effect,
+.project-card.glass-effect {
+  will-change: transform, opacity, background;
 }
 
 .badge {
-    will-change: transform;
+  will-change: transform;
 }
 
-/* Animação aprimorada para cards de certificação e badges - VERSÃO SUPER SUAVE */
+/* Animação aprimorada para certificações e badges */
+
 @keyframes card-fade-in {
-    0% {
-        opacity: 0;
-        transform: translateY(40px) scale(0.96);
-        filter: blur(5px);
-    }
 
-    50% {
-        opacity: 0.8;
-        filter: blur(1px);
-    }
+0% {
+  transform: translateY(40px) scale( 0.96);
 
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
-    }
+  opacity: 0;
+
+  filter: blur(5px);
 }
 
-/* Classes específicas para animação suave dos cards */
+50% {
+  opacity: 0.8;
+
+  filter: blur(1px);
+}
+
+100% {
+  transform: translateY(0) scale( 1);
+
+  opacity: 1;
+
+  filter: blur(0);
+}
+
+}
+
+/* Animações de cartão de vidro */
+
 .certification-card.slide-up,
 .badge.slide-up {
-    animation: none;
-    /* Remove animação anterior */
-    animation: card-fade-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    will-change: transform, opacity, filter;
+  animation: none;
+  animation: card-fade-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+  will-change: transform, opacity, filter;
 }
 
-/* Aplicando efeito cascata aos cards de certificação */
-.certification-card:nth-child(1).slide-up {
-    animation-delay: 0.05s;
+/* Efeito cascata para cartões de certificação */
+
+.certification-card:nth-child(1) {
+  animation-delay: 0.05s;
 }
 
-.certification-card:nth-child(2).slide-up {
-    animation-delay: 0.1s;
+.certification-card:nth-child(2) {
+  animation-delay: 0.1s;
 }
 
-.certification-card:nth-child(3).slide-up {
-    animation-delay: 0.15s;
+.certification-card:nth-child(3) {
+  animation-delay: 0.15s;
 }
 
-.certification-card:nth-child(4).slide-up {
-    animation-delay: 0.2s;
+.certification-card:nth-child(4) {
+  animation-delay: 0.2s;
 }
 
-.certification-card:nth-child(5).slide-up {
-    animation-delay: 0.25s;
+.certification-card:nth-child(5) {
+  animation-delay: 0.25s;
 }
 
-/* Efeito mais suave para os badges de reconhecimento */
+/* Efeito mais suave para badges de conquistas */
+
 .badge.slide-up {
-    animation-duration: 1.1s;
-    /* Ligeiramente mais lento para efeito mais suave */
+  animation-duration: 1.1s;
 }
 
-.badge:nth-child(1).slide-up {
-    animation-delay: 0.05s;
+.badge:nth-child(1) {
+  animation-delay: 0.05s;
 }
 
-.badge:nth-child(2).slide-up {
-    animation-delay: 0.2s;
+.badge:nth-child(2) {
+  animation-delay: 0.2s;
 }
 
-/* Animação de entrada e brilho para cards */
+/* Animação de brilho do cartão de vidro */
+
 @keyframes card-glow {
-    0% {
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
 
-    50% {
-        box-shadow: 0 8px 25px rgba(0, 168, 255, 0.4);
-    }
-
-    100% {
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
+0% {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.certification-card.slide-up {
-    animation: card-fade-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards,
-        card-glow 3s ease-in-out 0.9s infinite;
+50% {
+  box-shadow: 0 8px 25px rgba(0, 168, 255, 0.3);
 }
 
-/* Efeito especial para contadores em Reconhecimentos */
+100% {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+}
+
+.glass-effect.animate {
+  animation: card-fade-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards, card-glow 3s ease-in-out 0.9s infinite;
+}
+
+/* Animação de revelação de contador para conquistas */
+
 .counter-container {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+
+  overflow: hidden;
 }
+
+/* NOVO: Animação aprimorada para valores de contador */
 
 @keyframes counter-reveal {
-    0% {
-        opacity: 0;
-        transform: translateY(20px) scale(0.9);
-        filter: blur(4px);
-    }
 
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
-    }
+0% {
+  transform: translateY(20px) scale( 0.9);
+
+  opacity: 0;
+
+  filter: blur(4px);
+}
+
+100% {
+  transform: translateY(0) scale( 1);
+
+  opacity: 1;
+
+  filter: blur(0);
+}
+
 }
 
 .counter.visible-counter .counter-value,
 .counter.visible-counter .counter-prefix,
 .counter.visible-counter .counter-suffix {
-    animation: counter-reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: counter-reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+/* Timing escalonado para elementos do contador */
+
 .counter.visible-counter .counter-prefix {
-    animation-delay: 0.1s;
+  animation-delay: 0.1s;
 }
 
 .counter.visible-counter .counter-value {
-    animation-delay: 0.3s;
+  animation-delay: 0.3s;
 }
 
 .counter.visible-counter .counter-suffix {
-    animation-delay: 0.5s;
+  animation-delay: 0.5s;
 }
+
+/* NOVO: Efeito de brilho para o contador concluído */
+
+.counter.counter-complete .counter-value {
+  transition: text-shadow 0.3s ease-out;
+
+  text-shadow: 0 0 8px rgba(0, 168, 255, 0.5);
+}
+
+/* NOVO: Destacar valor de contagem em dólares */
+
+.counter.counter-complete[data-target*="$"] .counter-value {
+  color: #00d8ff;
+  text-shadow: 0 0 8px rgba(0, 216, 255, 0.6);
+}
+
+/* Efeito de hover de link social glassmorphism */
 
 .social-link:hover {
-    transform: translateX(8px);
-    transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  transform: translateY(-8px);
 }
 
-/* Contador de números animado - Versão otimizada */
-
-@keyframes countUp {
-    from {
-        content: "0";
-    }
-
-    to {
-        content: attr(data-target);
-    }
-}
-
-/* Animação de entrada suave para elementos */
+/* Animações de fade-in suaves */
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
 
-    to {
-        opacity: 1;
-    }
+from {
+  opacity: 0;
 }
 
-/* Animação de entrada de baixo para cima - Versão otimizada */
+to {
+  opacity: 1;
+}
+
+}
+
+/* Animação fade-up para cartões de vidro */
 
 @keyframes fadeInUp {
-    from {
-        transform: translateY(30px);
-        opacity: 0;
-    }
 
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+from {
+  transform: translateY(30px);
+
+  opacity: 0;
 }
 
-/* Animação de entrada da esquerda - Versão otimizada */
+to {
+  transform: translateY(0);
+
+  opacity: 1;
+}
+
+}
+
+/* Animação fade-left para itens de timeline */
 
 @keyframes fadeInLeft {
-    from {
-        transform: translateX(-30px);
-        opacity: 0;
-    }
 
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
+from {
+  transform: translateX(-30px);
+
+  opacity: 0;
 }
 
-/* Animação de entrada da direita - Versão otimizada */
+to {
+  transform: translateX(0);
+
+  opacity: 1;
+}
+
+}
+
+/* Animação fade-right */
 
 @keyframes fadeInRight {
-    from {
-        transform: translateX(30px);
-        opacity: 0;
-    }
 
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
+from {
+  transform: translateX(30px);
+
+  opacity: 0;
 }
 
-/* Animação de pulsar para indicadores - Versão otimizada */
+to {
+  transform: translateX(0);
+
+  opacity: 1;
+}
+
+}
+
+/* Animação pulse para indicadores de vidro */
 
 @keyframes pulse {
-    0% {
-        transform: scale(0.9);
-        opacity: 0.6;
-    }
 
-    50% {
-        transform: scale(1.1);
-        opacity: 1;
-    }
+0% {
+  transform: scale(0.9);
 
-    100% {
-        transform: scale(0.9);
-        opacity: 0.6;
-    }
+  opacity: 0.6;
 }
 
-/* Animação do indicador de scroll - Versão otimizada */
+50% {
+  transform: scale(1.1);
+
+  opacity: 1;
+}
+
+100% {
+  transform: scale(0.9);
+
+  opacity: 0.6;
+}
+
+}
+
+/* Animação bounce para indicador de rolagem */
 
 .scroll-indicator {
-    animation: bounce 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
-    will-change: transform;
+  animation: bounce 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+
+  will-change: transform;
 }
 
-/* Animação dos cartões de projetos - Versão otimizada */
+/* Animações de cartão de projeto */
 
 .project-card {
-    animation: fadeInUp 0.8s cubic-bezier(0.19, 1, 0.22, 1) both;
-    animation-delay: calc(var(--i, 0) * 0.1s);
-    will-change: transform, opacity;
+  animation: fadeInUp 0.8s cubic-bezier(0.19, 1, 0.22, 1) both;
+  animation-delay: calc(var( --i, 0) * 0.1s);
+
+  will-change: transform, opacity;
 }
 
-/* Animações para timeline - Versão otimizada */
+/* Animações de timeline */
 
 .timeline-item {
-    animation: fadeInLeft 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-    opacity: 0;
-    will-change: transform, opacity;
+  animation: fadeInLeft 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+
+  opacity: 0;
+
+  will-change: transform, opacity;
 }
 
-/* Redução de movimento para acessibilidade */
+/* Acessibilidade - preferências de movimento reduzido */
 
-@media (prefers-reduced-motion: reduce) {
+@media(prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
 
-    *,
-    ::before,
-    ::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
+    scroll-behavior: auto !important;
+  }
 
-    .animate-on-scroll {
-        transition: none !important;
-        transform: none !important;
-        opacity: 1 !important;
-    }
+  .animate-on-scroll {
+    transition: none !important;
+    transform: none !important;
 
-    .glitch::before,
-    .glitch::after {
-        display: none !important;
-    }
+    opacity: 1 !important;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    display: none !important;
+  }
 }
 
-/* Modo de animações reduzidas */
+/* Modo de movimento reduzido manual */
+
 .reduced-motion *,
 .reduced-motion ::before,
 .reduced-motion ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  transition-duration: 0.01ms !important;
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+
+  scroll-behavior: auto !important;
 }
 
-/* Aplicação progressiva das animações conforme scroll - Versão otimizada */
+/* Carregamento progressivo de animação na rolagem */
 
 @media(prefers-reduced-motion: no-preference) {
-    .animate-on-scroll {
-        transition: opacity 0.6s cubic-bezier(0.19, 1, 0.22, 1),
-            transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-        will-change: transform, opacity;
-        opacity: 0;
-    }
+  .animate-on-scroll {
+    transition: opacity 0.6s cubic-bezier(0.19, 1, 0.22, 1) , transform 0.6s cubic-bezier( 0.19, 1, 0.22, 1);
 
-    .animate-on-scroll.fade-in {
-        transform: translateY(20px);
-        opacity: 0;
-    }
+    opacity: 0;
 
-    .animate-on-scroll.fade-in-left {
-        transform: translateX(-20px);
-        opacity: 0;
-    }
-
-    .animate-on-scroll.fade-in-right {
-        transform: translateX(20px);
-        opacity: 0;
-    }
-
-    .animate-on-scroll.animate {
-        transform: translate(0, 0);
-        opacity: 1;
-    }
-}
-
-/* Security Dashboard Animations - Versão otimizada */
-
-.security-dashboard {
-    animation: fadeIn 0.8s cubic-bezier(0.19, 1, 0.22, 1);
     will-change: transform, opacity;
+  }
+
+  .animate-on-scroll.fade-in {
+    transform: translateY(20px);
+
+    opacity: 0;
+  }
+
+  .animate-on-scroll.fade-in-left {
+    transform: translateX(-20px);
+
+    opacity: 0;
+  }
+
+  .animate-on-scroll.fade-in-right {
+    transform: translateX(20px);
+
+    opacity: 0;
+  }
+
+  .animate-on-scroll.animate {
+    transform: translate(0, 0);
+
+    opacity: 1;
+  }
 }
 
-.dashboard-card {
-    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
-        box-shadow 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-    will-change: transform, box-shadow;
+/* Animações específicas de Glassmorphism */
+
+.glass-card {
+  animation: fadeIn 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+
+  will-change: transform, opacity;
 }
 
-.radar-metric .metric-bar::before {
-    animation: growBar 1.5s cubic-bezier(0.215, 0.61, 0.355, 1);
-    will-change: width;
+/* Efeitos de vidro e movimento */
+
+.glass-effect,
+.glass-card {
+  position: relative;
+
+  overflow: hidden;
 }
 
-@keyframes growBar {
-    from {
-        width: 0;
-        opacity: 0.7;
-    }
+/* NOVO: Efeito de shimmer para elementos de vidro */
 
-    to {
-        width: var(--percentage);
-        opacity: 1;
-    }
+.glass-shimmer-effect {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  transform: translateZ(0);
+  pointer-events: none;
 }
 
-.status-indicator {
-    animation: pulse 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
-    will-change: transform, opacity;
+/* NOVO: Padrão de grade para elementos de vidro */
+
+.glass-grid-pattern {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  pointer-events: none;
+
+  opacity: 0.04;
+  background-image: linear-gradient(rgba( 0, 168, 255, 0.3) 1px, transparent 1px) , linear-gradient( 90deg, rgba( 0, 168, 255, 0.3) 1px, transparent 1px);
+  background-size: 25px 25px;
 }
 
-.tag {
-    animation-name: fadeInUp;
-    animation-duration: 0.5s;
-    animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
-    animation-fill-mode: both;
-    will-change: transform, opacity;
+/* NOVO: Partículas de vidro flutuantes */
+
+.glass-particle {
+  position: absolute;
+
+  width: 3px;
+  height: 3px;
+
+  pointer-events: none;
+
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Security Dashboard Cards Staggered Animation - Versão otimizada */
+/* NOVO: Animação de revelação de vidro */
 
-.dashboard-card:nth-child(1) {
-    animation-delay: 0.1s;
+@keyframes glass-reveal {
+
+0% {
+  opacity: 0;
+
+  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(0);
 }
 
-.dashboard-card:nth-child(2) {
-    animation-delay: 0.2s;
+100% {
+  opacity: 1;
+
+  backdrop-filter: blur(var( --glass-blur, 5px) );
+  -webkit-backdrop-filter: blur(var( --glass-blur, 5px) );
 }
 
-.dashboard-card:nth-child(3) {
-    animation-delay: 0.3s;
 }
 
-.dashboard-card:nth-child(4) {
-    animation-delay: 0.4s;
+.glass-reveal {
+  animation: glass-reveal 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
 }
 
-/* Skill progress animation */
-@keyframes progressAnimation {
-    from {
-        transform: scaleX(0);
-        opacity: 0.8;
-    }
+/* NOVO: Animação de flutuação de partícula */
 
-    to {
-        transform: scaleX(1);
-        opacity: 1;
-    }
+@keyframes floatingParticle {
+
+0% {
+  transform: translate(0, 0) rotate( 0deg);
 }
 
-.skill-progress {
-    animation: progressAnimation 1.2s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
-    will-change: transform;
+25% {
+  transform: translate(10px, -15px) rotate( 90deg);
 }
 
-/* Efeito de Glitch para imagens */
-.glitch-image {
-    will-change: transform;
+50% {
+  transform: translate(20px, 5px) rotate( 180deg);
 }
 
-.glitch-layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    will-change: transform, clip-path;
+75% {
+  transform: translate(10px, 15px) rotate( 270deg);
 }
 
-.glitch-layer-1 {
-    left: -2px;
-    background-color: transparent;
+100% {
+  transform: translate(0, 0) rotate( 360deg);
 }
 
-.glitch-layer-2 {
-    left: 2px;
-    background-color: transparent;
-}
-
-.glitching .glitch-layer-1 {
-    animation: glitch-image-1 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite both;
-}
-
-.glitching .glitch-layer-2 {
-    animation: glitch-image-2 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite both;
-}
-
-@keyframes glitch-image-1 {
-
-    0%,
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-        clip-path: inset(0% 0% 0% 0%);
-    }
-
-    20% {
-        clip-path: inset(20% 0% 0% 0%);
-        transform: translateX(-2px);
-    }
-
-    40% {
-        clip-path: inset(40% 0% 0% 0%);
-        transform: translateX(2px);
-    }
-
-    60% {
-        clip-path: inset(60% 0% 0% 0%);
-        transform: translateX(-2px);
-    }
-
-    80% {
-        clip-path: inset(80% 0% 0% 0%);
-        transform: translateX(2px);
-    }
-}
-
-@keyframes glitch-image-2 {
-
-    0%,
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-        clip-path: inset(0% 0% 0% 0%);
-    }
-
-    25% {
-        clip-path: inset(0% 0% 25% 0%);
-        transform: translateX(2px);
-    }
-
-    50% {
-        clip-path: inset(0% 25% 0% 0%);
-        transform: translateX(-2px);
-    }
-
-    75% {
-        clip-path: inset(0% 0% 0% 25%);
-        transform: translateX(2px);
-    }
 }
